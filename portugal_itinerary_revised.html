@@ -1,196 +1,656 @@
 
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>葡萄牙女生獨旅 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  .wrap { padding: 16px 0 24px; }
-  .trip-header { text-align: center; margin-bottom: 20px; }
-  .trip-header h1 { font-size: 20px; font-weight: 500; color: var(--color-text-primary); }
-  .trip-header p { font-size: 13px; color: var(--color-text-secondary); margin-top: 4px; }
-  .day-card { border: 1px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); margin-bottom: 12px; overflow: hidden; }
-  .day-header { display: flex; align-items: center; gap: 10px; padding: 12px 16px; cursor: pointer; user-select: none; background: var(--color-background-secondary); border-bottom: 1px solid var(--color-border-tertiary); }
-  .day-header:hover { background: var(--color-background-tertiary); }
-  .day-badge { font-size: 11px; font-weight: 500; padding: 3px 8px; border-radius: 20px; white-space: nowrap; }
-  .badge-lisbon { background: #9FE1CB; color: #04342C; }
-  .badge-porto { background: #AFA9EC; color: #26215C; }
-  .badge-travel { background: #D3D1C7; color: #2C2C2A; }
-  .day-title { font-size: 14px; font-weight: 500; color: var(--color-text-primary); flex: 1; }
-  .day-sub { font-size: 12px; color: var(--color-text-secondary); }
-  .chevron { font-size: 14px; color: var(--color-text-secondary); transition: transform 0.2s; }
-  .chevron.open { transform: rotate(180deg); }
-  .day-body { padding: 14px 16px; display: none; }
-  .day-body.open { display: block; }
-  .activity { display: flex; gap: 10px; margin-bottom: 10px; align-items: flex-start; }
-  .activity:last-child { margin-bottom: 0; }
-  .act-time { font-size: 11px; color: var(--color-text-tertiary); min-width: 52px; padding-top: 2px; }
-  .act-content { flex: 1; }
-  .act-title { font-size: 13px; font-weight: 500; color: var(--color-text-primary); }
-  .act-desc { font-size: 12px; color: var(--color-text-secondary); margin-top: 2px; line-height: 1.5; }
-  .act-tip { font-size: 11px; color: var(--color-text-info); margin-top: 3px; }
-  .act-warn { font-size: 11px; color: var(--color-text-warning); margin-top: 3px; }
-  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-border-secondary); margin-top: 5px; flex-shrink: 0; }
-  .dot.highlight { background: #7F77DD; }
-  .dot.food { background: #1D9E75; }
-  .dot.transit { background: #888780; }
-  .hotel-bar { display: flex; align-items: center; gap: 6px; padding: 8px 12px; border-radius: 8px; background: var(--color-background-tertiary); margin-bottom: 10px; font-size: 12px; color: var(--color-text-secondary); border-left: 3px solid var(--color-border-secondary); }
-  .flight-card { background: var(--color-background-tertiary); border-radius: 10px; padding: 12px 14px; margin-bottom: 10px; }
-  .flight-row { display: flex; align-items: center; gap: 8px; font-size: 13px; }
-  .flight-city { font-weight: 500; color: var(--color-text-primary); }
-  .flight-arrow { color: var(--color-text-tertiary); flex: 1; text-align: center; font-size: 11px; border-top: 1px dashed var(--color-border-secondary); }
-  .flight-time { font-size: 12px; color: var(--color-text-secondary); text-align: center; margin-top: 4px; }
-  .warn-box { font-size: 11px; color: var(--color-text-warning); background: var(--color-background-warning); border-radius: 6px; padding: 6px 10px; margin-bottom: 10px; }
-  .info-box { font-size: 11px; color: var(--color-text-info); background: var(--color-background-info); border-radius: 6px; padding: 6px 10px; margin-bottom: 10px; }
-</style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-<div class="wrap">
-  <div class="trip-header">
-    <h1><i class="ti ti-map-pin" aria-hidden="true"></i> 葡萄牙女生獨旅 2026</h1>
-    <p>里斯本 2晚 → 波多 2晚 → 里斯本 1晚</p>
+  :root {
+    --lisbon: #2D7A5F;
+    --lisbon-light: #EAF5F0;
+    --lisbon-mid: #9FD9C3;
+    --porto: #5B4DB8;
+    --porto-light: #EEEDFB;
+    --porto-mid: #B8B2E8;
+    --travel: #7A6A52;
+    --travel-light: #F5F0E8;
+    --travel-mid: #C8BC9E;
+    --text: #1A1A1A;
+    --text-muted: #6B6860;
+    --text-light: #9B9890;
+    --border: #E8E4DC;
+    --bg: #FDFAF5;
+    --card-bg: #FFFFFF;
+    --warn-bg: #FFF8EC;
+    --warn: #C17A20;
+    --info-bg: #EEF6FF;
+    --info: #2665A8;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.6;
+    padding: 40px 20px 60px;
+  }
+
+  .container { max-width: 720px; margin: 0 auto; }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .header p {
+    font-size: 13px;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+  }
+  .route-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
+  .route-city {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .route-city.lisbon { background: var(--lisbon-light); color: var(--lisbon); }
+  .route-city.porto { background: var(--porto-light); color: var(--porto); }
+  .route-arrow { color: var(--text-light); font-size: 11px; }
+
+  /* Day cards */
+  .day-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+
+  .day-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 18px;
+    cursor: pointer;
+    user-select: none;
+    border-bottom: 1px solid transparent;
+    transition: background 0.15s;
+  }
+  .day-header:hover { background: #FAFAF8; }
+  .day-card.open .day-header { border-bottom-color: var(--border); }
+
+  .badge {
+    font-size: 10px;
+    font-weight: 500;
+    padding: 3px 9px;
+    border-radius: 20px;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .badge.lisbon { background: var(--lisbon-light); color: var(--lisbon); }
+  .badge.porto { background: var(--porto-light); color: var(--porto); }
+  .badge.travel { background: var(--travel-light); color: var(--travel); }
+
+  .day-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    flex: 1;
+    min-width: 0;
+  }
+  .day-hotel {
+    font-size: 11px;
+    color: var(--text-light);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .chevron {
+    color: var(--text-light);
+    font-size: 11px;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+  .day-card.open .chevron { transform: rotate(180deg); }
+
+  .day-body {
+    display: none;
+    padding: 16px 18px 18px;
+  }
+  .day-card.open .day-body { display: block; }
+
+  /* Info/warn boxes */
+  .info-box, .warn-box {
+    font-size: 12px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+  .info-box { background: var(--info-bg); color: var(--info); }
+  .warn-box { background: var(--warn-bg); color: var(--warn); }
+
+  /* Hotel label */
+  .hotel-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-muted);
+    background: #F7F5F0;
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin-bottom: 14px;
+    border-left: 3px solid var(--border);
+  }
+
+  /* Flight card */
+  .flight-card {
+    background: #F7F5F0;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+  .flight-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .flight-city { font-weight: 500; font-size: 14px; }
+  .flight-line {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+  }
+  .flight-label { font-size: 10px; color: var(--text-light); }
+  .flight-dash {
+    width: 100%;
+    border-top: 1px dashed #C8C4BC;
+    position: relative;
+  }
+  .flight-dash::after {
+    content: '✈';
+    position: absolute;
+    top: -9px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: var(--text-muted);
+    background: #F7F5F0;
+    padding: 0 4px;
+  }
+  .flight-time {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 8px;
+  }
+
+  /* Activities */
+  .activities { display: flex; flex-direction: column; gap: 0; }
+  .activity {
+    display: flex;
+    gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid #F0EDE8;
+    align-items: flex-start;
+  }
+  .activity:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .act-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+  .act-dot.default { background: #C8C4BC; }
+  .act-dot.highlight { background: var(--porto); }
+  .act-dot.food { background: var(--lisbon); }
+  .act-dot.transit { background: #A89880; }
+
+  .act-time {
+    font-size: 11px;
+    color: var(--text-light);
+    min-width: 48px;
+    padding-top: 1px;
+    flex-shrink: 0;
+  }
+  .act-content { flex: 1; }
+  .act-title { font-size: 13px; font-weight: 500; color: var(--text); }
+  .act-desc { font-size: 12px; color: var(--text-muted); margin-top: 2px; line-height: 1.55; }
+  .act-tip { font-size: 11px; color: var(--info); margin-top: 3px; }
+  .act-warn { font-size: 11px; color: var(--warn); margin-top: 3px; }
+
+  /* Responsive */
+  @media (max-width: 500px) {
+    body { padding: 24px 14px 48px; }
+    .header h1 { font-size: 22px; }
+    .day-hotel { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <p>2026 · 女生獨旅</p>
+    <h1>葡萄牙旅行計畫</h1>
+    <div class="route-strip">
+      <span class="route-city lisbon">里斯本 2晚</span>
+      <span class="route-arrow">→</span>
+      <span class="route-city porto">波多 2晚</span>
+      <span class="route-arrow">→</span>
+      <span class="route-city lisbon">里斯本 1晚</span>
+    </div>
   </div>
 
-  <!-- 出發日 -->
-  <div class="day-card">
-    <div class="day-header" onclick="toggle(this)">
-      <span class="day-badge badge-travel">出發日</span>
+  <!-- 6/17 出發 -->
+  <div class="day-card open">
+    <div class="day-header" onclick="toggleCard(this)">
+      <span class="badge travel">出發日</span>
       <span class="day-title">6/17（四）深夜出發</span>
-      <span class="day-sub">TPE → LIS</span>
+      <span class="day-hotel">TPE → LIS</span>
       <span class="chevron">▾</span>
     </div>
     <div class="day-body">
       <div class="flight-card">
         <div class="flight-row">
-          <span class="flight-city">台北（TPE）</span>
-          <span class="flight-arrow">✈ 飛行中</span>
-          <span class="flight-city">里斯本（LIS）</span>
+          <span class="flight-city">台北 TPE</span>
+          <div class="flight-line">
+            <div class="flight-dash"></div>
+          </div>
+          <span class="flight-city">里斯本 LIS</span>
         </div>
-        <div class="flight-time">6/17 23:50 出發 → 6/18 12:35 抵達</div>
+        <div class="flight-time">6/17 23:50 出發 &nbsp;→&nbsp; 6/18 12:35 抵達</div>
       </div>
-      <div class="activity"><div class="dot transit"></div><div class="act-time">建議</div><div class="act-content"><div class="act-desc">帶頸枕、壓縮襪，機上補眠應對時差。抵達後直接前往 The 7 Hotel。</div></div></div>
+      <div class="activities">
+        <div class="activity">
+          <div class="act-dot transit"></div>
+          <div class="act-time">建議</div>
+          <div class="act-content">
+            <div class="act-desc">帶頸枕、壓縮襪，機上補眠應對時差。抵達後直接前往 The 7 Hotel。</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- 6/18 抵達里斯本 -->
   <div class="day-card">
-    <div class="day-header" onclick="toggle(this)">
-      <span class="day-badge badge-lisbon">里斯本</span>
+    <div class="day-header" onclick="toggleCard(this)">
+      <span class="badge lisbon">里斯本</span>
       <span class="day-title">6/18（五）抵達里斯本，Alfama 初探</span>
-      <span class="day-sub">住：The 7 Hotel</span>
-      <span class="chevron open">▾</span>
+      <span class="day-hotel">住：The 7 Hotel</span>
+      <span class="chevron">▾</span>
     </div>
-    <div class="day-body open">
-      <div class="hotel-bar"><i class="ti ti-bed" aria-hidden="true"></i> The 7 Hotel，里斯本 Baixa 區（R. Áurea 121）</div>
-      <div class="info-box"><i class="ti ti-info-circle" aria-hidden="true"></i> The 7 Hotel 位於里斯本市中心 Baixa，步行可達主要景點。</div>
-      <div class="activity"><div class="dot transit"></div><div class="act-time">12:35</div><div class="act-content"><div class="act-title">抵達里斯本機場</div><div class="act-desc">搭地鐵紅線至 Oriente，再轉綠線至 Baixa-Chiado，步行至 The 7 Hotel，約 30–40 分鐘。</div></div></div>
-      <div class="activity"><div class="dot highlight"></div><div class="act-time">下午</div><div class="act-content"><div class="act-title">Alfama 區漫步 + 28 號電車</div><div class="act-desc">搭復古電車上山，穿梭巷弄，感受里斯本最古老街區的氣息。</div></div></div>
-      <div class="activity"><div class="dot highlight"></div><div class="act-time">傍晚</div><div class="act-content"><div class="act-title">Miradouro de Santa Luzia</div><div class="act-desc">藍白瓷磚觀景台，俯瞰 Alfama 紅屋頂和塔霍河，黃昏時刻最美。</div></div></div>
-      <div class="activity"><div class="dot food"></div><div class="act-time">晚上</div><div class="act-content"><div class="act-title">Alfama 聽一場 Fado</div><div class="act-desc">葡萄牙靈魂音樂，在小酒館現場演唱，配葡萄牙紅酒，旅程最難忘的夜晚之一。</div></div></div>
+    <div class="day-body">
+      <div class="hotel-label">🏨 The 7 Hotel，里斯本 Baixa 區（R. Áurea 121）</div>
+      <div class="info-box">The 7 Hotel 位於里斯本市中心 Baixa，步行可達主要景點。</div>
+      <div class="activities">
+        <div class="activity">
+          <div class="act-dot transit"></div>
+          <div class="act-time">12:35</div>
+          <div class="act-content">
+            <div class="act-title">抵達里斯本機場</div>
+            <div class="act-desc">搭地鐵紅線至 Oriente，再轉綠線至 Baixa-Chiado，步行至 The 7 Hotel，約 30–40 分鐘。</div>
+          </div>
+        </div>
+        <div class="activity">
+          <div class="act-dot highlight"></div>
+          <div class="act-time">下午</div>
+          <div class="act-content">
+            <div class="act-title">Alfama 區漫步 + 28 號電車</div>
+            <div class="act-desc">搭復古電車上山，穿梭巷弄，感受里斯本最古老街區的氣息。</div>
+          </div>
+        </div>
+        <div class="activity">
+          <div class="act-dot highlight"></div>
+          <div class="act-time">傍晚</div>
+          <div class="act-content">
+            <div class="act-title">Miradouro de Santa Luzia</div>
+            <div class="act-desc">藍白瓷磚觀景台，俯瞰 Alfama 紅屋頂和塔霍河，黃昏時刻最美。</div>
+          </div>
+        </div>
+        <div class="activity">
+          <div class="act-dot food"></div>
+          <div class="act-time">晚上</div>
+          <div class="act-content">
+            <div class="act-title">Alfama 聽一場 Fado</div>
+            <div class="act-desc">葡萄牙靈魂音樂，在小酒館現場演唱，配葡萄牙紅酒，旅程最難忘的夜晚之一。</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- 6/19 里斯本精華 -->
   <div class="day-card">
-    <div class="day-header" onclick="toggle(this)">
-      <span class="day-badge badge-lisbon">里斯本</span>
+    <div class="day-header" onclick="toggleCard(this)">
+      <span class="badge lisbon">里斯本</span>
       <span class="day-title">6/19（六）里斯本精華 + Belém</span>
-      <span class="day-sub">住：The 7 Hotel</span>
+      <span class="day-hotel">住：The 7 Hotel</span>
       <span class="chevron">▾</span>
     </div>
     <div class="day-body">
-      <div class="hotel-bar"><i class="ti ti-bed" aria-hidden="true"></i> The 7 Hotel，里斯本</div>
-      <div class="warn-box"><i class="ti ti-alert-triangle" aria-hidden="true"></i> 熱羅尼莫斯修道院週一休館，6/19（六）是絕佳時機，建議早點出發。貝倫塔目前整修中，無法入內但可拍外觀。</div>
-      <div class="activity"><div class="dot highlight"></div><div class="act-time">上午</div><div class="act-content"><div class="act-title">聖喬治城堡（Castelo de São Jorge）</div><div class="act-desc">360 度俯瞰全城，裡面有孔雀自由漫步，早開門人少。</div></div></div>
-      <div class="activity"><div class="dot highlight"></div><div class="act-time">上午</div><div class="act-content"><div class="act-title">里斯本大教堂（Sé de Lisboa）</div><div class="act-desc">1147 年建，城堡山腳步行可達。</div></div></div>
-      <div class="activity"><div class="dot transit"></div><div class="act-time">下午</div><div class="act-content"><div class="act-title">前往 Belém 區（搭電車 15E 或 Uber）</div><div class="act-desc">市區到 Belém 約 20–30 分鐘。</div></div></div>
-      <div class="activity"><div class="dot highlight"></div><div class="act-time">下午</div><div class="act-content"><div class="act-title">熱羅尼莫斯修道院（Jerónimos Monastery）</div><div class="act-desc">UNESCO 世界遺產，曼努埃爾式石雕精緻如蕾絲，Vasco da Gama 長眠於此。票約 €10，建議提前網路訂。</div></div></div>
-      <div class="activity"><div class="dot food"></div><div class="act-time">下午</div><div class="act-content"><div class="act-title">Pastéis de Belém 吃正宗蛋撻</div><div class="act-desc">1837 年創立元祖店，灑肉桂粉配 bica 咖啡，人生完整。</div></div></div>
-      <div class="activity"><div class="dot highlight"></div><div class="act-time">傍晚</div><div class="act-content"><div class="act-title">Chiado & 卡爾莫修道院廢墟</div><div class="act-desc">大地震留下的空頂廢墟，視覺衝擊極強，旁邊 Chiado 適合逛街喝咖啡。</div></div></div>
+      <div class="hotel-label">🏨 The 7 Hotel，里斯本</div>
+      <div class="warn-box">⚠️ 熱羅尼莫斯修道院週一休館，6/19（六）是最佳時機，建議早點出發。貝倫塔目前整修中，無法入內但可拍外觀。</div>
+      <div class="activities">
+        <div class="activity">
+          <div class="act-dot highlight"></div>
+          <div class="act-time">上午</div>
+          <div class="act-content">
+            <div class="act-title">聖喬治城堡（Castelo de São Jorge）</div>
+            <div class="act-desc">360 度俯瞰全城，裡面有孔雀自由漫步，早開門人少。</div>
+          </div>
+        </div>
+        <div class="activity">
+          <div class="act-dot highlight"></div>
+          <div class="act-time">上午</div>
+          <div class="act-content">
+            <div class="act-title">里斯本大教堂（Sé de Lisboa）</div>
+            <div class="act-desc">1147 年建，城堡山腳步行可達。</div>
+          </div>
+        </div>
+        <div class="activity">
+          <div class="act-dot transit"></div>
+          <div class="act-time">下午</div>
+          <div class="act-content">
+            <div class="act-title">前往 Belém 區</div>
+            <div class="act-desc">搭電車 15E 或 Uber，市區到 Belém 約 20–30 分鐘。</div>
+          </div>
+        </div>
+        <div class="activity">
+          <div class="act-dot highlight"></div>
+          <div class="act-time">下午</div>
+          <div class="act-content">
+            <div class="act-title">熱羅尼莫斯修道院（Jerónimos Monastery）</div>
+            <div class="act-desc">UNESCO 世界遺產，曼努埃爾式石雕精緻如蕾絲。票約 €10，建議提前網路訂。</div>
+          </div>
+        </div>
+        <div class="activity">
+          <div class="act-dot food"></div>
+          <div class="act-time">下午</div>
+          <div class="act-content">
+            <div class="act-title">Pastéis de Belém 吃正宗蛋撻</div>
+            <div class="act-desc">1837 年創立元祖店，灑肉桂粉配 bica 咖啡，人生完整。</div>
+          </div>
+        </div>
+        <div class="activity">
+          <div class="act-dot highlight"></div>
+          <div class="act-time">傍晚</div>
+          <div class="act-content">
+            <div class="act-title">Chiado &amp; 卡爾莫修道院廢墟</div>
+            <div class="act-desc">大地震留下的空頂廢墟，視覺衝擊極強，旁邊 Chiado 適合逛街喝咖啡。</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- 6/20 里斯本→波多 -->
+  <!-- 6/20 移動日 -->
   <div class="day-card">
-    <div class="day-header" onclick="toggle(this)">
-      <span class="day-badge badge-travel">移動日</span>
+    <div class="day-header" onclick="toggleCard(this)">
+      <span class="badge travel">移動日</span>
       <span class="day-title">6/20（日）里斯本 → 波多</span>
-      <span class="day-sub">住：River Eyes Suites（Gaia）</span>
+      <span class="day-hotel">住：River Eyes Suites（Gaia）</span>
       <span class="chevron">▾</span>
     </div>
     <div class="day-body">
-      <div class="hotel-bar"><i class="ti ti-bed" aria-hidden="true"></i> River Eyes Suites，Vila Nova de Gaia（波多對岸，近路易一世橋）</div>
-      <div class="activity"><div class="dot transit"></div><div class="act-time">11:00</div><div class="act-content"><div class="act-title">The 7 Hotel 退房</div><div class="act-desc">拉著行李步行或搭 Uber 前往 Oriente 火車站（約 15–20 分鐘）。</div></div></div>
-      <div class="activity"><div class="dot transit"></div><div class="act-time">約 12:00</div><div class="act-content"><div class="act-title">搭 Alfa Pendular 高速列車北上</div><div class="act-desc">里斯本 Oriente → 波多 Campanhã，約 3 小時。建議提早在 cp.pt 訂好票（€20–€35）。</div><div class="act-tip">💡 選購靠窗座位，沿途有漂亮的葡萄牙鄉間風景。</div></div></div>
-      <div class="activity"><div class="dot transit"></div><div class="act-time">約 15:00</div><div class="act-content"><div class="act-title">抵達波多，前往 River Eyes Suites</div><div class="act-desc">從 Campanhã 站搭地鐵或 Uber 至 Gaia 河岸，辦理入住。</div></div></div>
-      <div class="activity"><div class="dot highlight"></div><div class="act-time">下午</div><div class="act-content"><div class="act-title">Ribeira 河岸初探 + 路易一世橋</div><div class="act-desc">住在 Gaia 側，走路就能上橋，傍晚俯瞰波多舊城是最棒的開場。</div></div></div>
-      <div class="activity"><div class="dot food"></div><div class="act-time">晚上</div><div class="act-content"><div class="act-title">Gaia 河岸餐廳 + 試喝波特酒</div><div class="act-desc">Gaia 對岸有大型酒莊（Graham's、Sandeman），部分營業至傍晚，晚餐後可到河岸酒吧繼續喝。</div></div></div>
+      <div class="hotel-label">🏨 River Eyes Suites，Vila Nova de Gaia（波多對岸，近路易一世橋）</div>
+      <div class="activities">
+        <div class="activity">
+          <div class="act-dot transit"></div>
+          <div class="act-time">11:00</div>
+          <div class="act-content">
+            <div class="act-title">The 7 Hotel 退房</div>
+            <div class="act-desc">步行或搭 Uber 前往 Oriente 火車站，約 15–20 分鐘。</div>
+          </div>
+        </div>
+        <div class="activity">
+          <div class="act-dot transit"></div>
+          <div class="act-time">約 12:00</div>
+          <div class="act-content">
+            <div class="act-title">搭 Alfa Pendular 高速列車北上</div>
+            <div class="act-desc">里斯本 Oriente → 波多 Campanhã，約 3 小時。建議提前在 cp.pt 訂票（€20–€35）。</div>
+            <div class="act-tip">💡 選靠窗座位，沿途有葡萄牙鄉間風景。</div>
+          </div>
+        </div>
+        <div class="activity">
+          <div class="act-dot transit"></div>
+          <div class="act-time">約 15:00</div>
+          <div class="act-content">
+            <div class="act-title">抵達波多，前往 River Eyes Suites</div>
+            <div class="act-desc">從 Campanhã 站搭地鐵或 Uber 至 Gaia 河岸，辦理入住。</div>
+          </div>
+        </div>
+        <div class="activity">
+          <div class="act-dot highlight"></div>
+          <div class="act-time">下午</div>
+          <div class="act-content">
+            <div class="act-title">Ribeira 河岸初探 + 路易一世橋</div>
+            <div class="act-desc">住在 Gaia 側，走路就能上橋，傍晚俯瞰波多舊城是最棒的開場。</div>
+          </div>
+        </div>
+        <div class="activity">
+          <div class="act-dot food"></div>
+          <div class="act-time">晚上</div>
+          <div class="act-content">
+            <div class="act-title">Gaia 河岸餐廳 + 試喝波特酒</div>
+            <div class="act-desc">Graham's、Sandeman 等酒莊部分營業至傍晚，晚餐後可到河岸酒吧繼續喝。</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- 6/21 波多精華 -->
+  <!-- 6/21 波多 -->
   <div class="day-card">
-    <div class="day-header" onclick="toggle(this)">
-      <span class="day-badge badge-porto">波多</span>
+    <div class="day-header" onclick="toggleCard(this)">
+      <span class="badge porto">波多</span>
       <span class="day-title">6/21（一）波多精華一日遊</span>
-      <span class="day-sub">住：River Eyes Suites</span>
+      <span class="day-hotel">住：River Eyes Suites</span>
       <span class="chevron">▾</span>
     </div>
     <div class="day-body">
-      <div class="hotel-bar"><i class="ti ti-bed" aria-hidden="true"></i> River Eyes Suites，Gaia</div>
-      <div class="activity"><div class="dot highlight"></div><div class="act-time">上午早</div><div class="act-content"><div class="act-title">萊羅書店（Livraria Lello）</div><div class="act-desc">世界最美書店之一，建議一開門就衝（週一 10:00 開），人少好拍照，需提前購票。</div></div></div>
-      <div class="activity"><div class="dot highlight"></div><div class="act-time">上午</div><div class="act-content"><div class="act-title">克萊瑞格斯鐘塔（Torre dos Clérigos）</div><div class="act-desc">爬 240 階，俯瞰波多全城。約 €10，與書店步行 3 分鐘。</div></div></div>
-      <div class="activity"><div class="dot highlight"></div><div class="act-time">上午</div><div class="act-content"><div class="act-title">波多大教堂（Sé do Porto）</div><div class="act-desc">藍白瓷磚迴廊，俯瞰杜羅河，步行可達。</div></div></div>
-      <div class="activity"><div class="dot food"></div><div class="act-time">午餐</div><div class="act-content"><div class="act-title">嚐 Francesinha</div><div class="act-desc">波多招牌料理：厚厚的起司肉醬三明治，配上一杯本地啤酒。推薦 Café Santiago 或 Capa Negra。</div></div></div>
-      <div class="activity"><div class="dot highlight"></div><div class="act-time">下午</div><div class="act-content"><div class="act-title">Palácio da Bolsa 證券交易所宮</div><div class="act-desc">必看「阿拉伯廳」，導覽 30 分鐘，金碧輝煌令人屏息。票 €14。</div></div></div>
-      <div class="activity"><div class="dot highlight"></div><div class="act-time">下午</div><div class="act-content"><div class="act-title">聖法蘭西斯科教堂（Igreja de São Francisco）</div><div class="act-desc">哥德外觀藏著鋪天蓋地金箔裝飾的巴洛克內部，震撼指數滿分。</div></div></div>
-      <div class="activity"><div class="dot food"></div><div class="act-time">傍晚</div><div class="act-content"><div class="act-title">Ribeira 廣場看夕陽</div><div class="act-desc">坐在河邊喝杯葡萄牙白酒，看光線打在對岸 Gaia 酒莊上，是波多最美的時刻。</div></div></div>
+      <div class="hotel-label">🏨 River Eyes Suites，Gaia</div>
+      <div class="activities">
+        <div class="activity">
+          <div class="act-dot highlight"></div>
+          <div class="act-time">早上</div>
+          <div class="act-content">
+            <div class="act-title">萊羅書店（Livraria Lello）</div>
+            <div class="act-desc">世界最美書店之一，週一 10:00 開，建議一開門就去，人少好拍照。需提前購票。</div>
+          </div>
+        </div>
+        <div class="activity">
+          <div class="act-dot highlight"></div>
+          <div class="act-time">上午</div>
+          <div class="act-content">
+            <div class="act-title">克萊瑞格斯鐘塔（Torre dos Clérigos）</div>
+            <div class="act-desc">爬 240 階俯瞰波多全城，約 €10，與書店步行 3 分鐘。</div>
+          </div>
+        </div>
+        <div class="activity">
+          <div class="act-dot highlight"></div>
+          <div class="act-time">上午</div>
+          <div class="act-content">
+            <div class="act-title">波多大教堂（Sé do Porto）</div>
+            <div class="act-desc">藍白瓷磚迴廊，俯瞰杜羅河，步行可達。</div>
+          </div>
+        </div>
+        <div class="activity">
+          <div class="act-dot food"></div>
+          <div class="act-time">午餐</div>
+          <div class="act-content">
+            <div class="act-title">嚐 Francesinha</div>
+            <div class="act-desc">波多招牌料理：厚厚的起司肉醬三明治，配本地啤酒。推薦 Café Santiago 或 Capa Negra。</div>
+          </div>
+        </div>
+        <div class="activity">
+          <div class="act-dot highlight"></div>
+          <div class="act-time">下午</div>
+          <div class="act-content">
+            <div class="act-title">Palácio da Bolsa 證券交易所宮</div>
+            <div class="act-desc">必看「阿拉伯廳」，導覽 30 分鐘，金碧輝煌令人屏息。票 €14。</div>
+          </div>
+        </div>
+        <div class="activity">
+          <div class="act-dot highlight"></div>
+          <div class="act-time">下午</div>
+          <div class="act-content">
+            <div class="act-title">聖法蘭西斯科教堂（Igreja de São Francisco）</div>
+            <div class="act-desc">哥德外觀藏著鋪天蓋地金箔裝飾的巴洛克內部，震撼指數滿分。</div>
+          </div>
+        </div>
+        <div class="activity">
+          <div class="act-dot food"></div>
+          <div class="act-time">傍晚</div>
+          <div class="act-content">
+            <div class="act-title">Ribeira 廣場看夕陽</div>
+            <div class="act-desc">坐在河邊喝杯葡萄牙白酒，看光線打在對岸 Gaia 酒莊上，波多最美的時刻。</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- 6/22 波多→里斯本 -->
+  <!-- 6/22 移動日 -->
   <div class="day-card">
-    <div class="day-header" onclick="toggle(this)">
-      <span class="day-badge badge-travel">移動日</span>
+    <div class="day-header" onclick="toggleCard(this)">
+      <span class="badge travel">移動日</span>
       <span class="day-title">6/22（二）波多 → 里斯本，最後一晚</span>
-      <span class="day-sub">住：Holiday Inn Express Plaza Saldanha</span>
+      <span class="day-hotel">住：Holiday Inn Express Saldanha</span>
       <span class="chevron">▾</span>
     </div>
     <div class="day-body">
-      <div class="hotel-bar"><i class="ti ti-bed" aria-hidden="true"></i> Holiday Inn Express Lisbon – Plaza Saldanha（近機場地鐵，方便隔日出發）</div>
-      <div class="activity"><div class="dot highlight"></div><div class="act-time">早晨</div><div class="act-content"><div class="act-title">波多最後晨走：路易一世橋</div><div class="act-desc">趁退房前在橋上走一趟，清晨無人的橋景最美。</div></div></div>
-      <div class="activity"><div class="dot transit"></div><div class="act-time">11:00</div><div class="act-content"><div class="act-title">River Eyes Suites 退房</div><div class="act-desc">前往波多 Campanhã 火車站（搭 Uber 或地鐵約 20 分鐘）。</div></div></div>
-      <div class="activity"><div class="dot transit"></div><div class="act-time">約 12:00</div><div class="act-content"><div class="act-title">搭火車南下里斯本</div><div class="act-desc">約 3 小時抵達 Oriente，再搭地鐵至 Saldanha，前往 Holiday Inn Express 辦理 Check-in。</div></div></div>
-      <div class="activity"><div class="dot highlight"></div><div class="act-time">下午</div><div class="act-content"><div class="act-title">Chiado / Bairro Alto 閒逛購物</div><div class="act-desc">買伴手禮的好時機：葡式瓷磚、軟木製品、葡萄牙罐頭、Pastéis de Nata 餅乾盒。</div></div></div>
-      <div class="activity"><div class="dot food"></div><div class="act-time">晚餐</div><div class="act-content"><div class="act-title">Time Out Market Lisbon 或海鮮大餐</div><div class="act-desc">告別晚餐，推薦 Cervejaria Ramiro（海鮮）或 Solar dos Presuntos（傳統葡式），需提前訂位。</div></div></div>
-      <div class="activity"><div class="dot highlight"></div><div class="act-time">傍晚</div><div class="act-content"><div class="act-title">Miradouro da Graça 看最後一次夕陽</div><div class="act-desc">比 Santa Luzia 遊客少，視野更廣，有 Kiosk 可以坐下來喝一杯。</div></div></div>
+      <div class="hotel-label">🏨 Holiday Inn Express Lisbon – Plaza Saldanha（近機場地鐵，方便隔日出發）</div>
+      <div class="activities">
+        <div class="activity">
+          <div class="act-dot highlight"></div>
+          <div class="act-time">早晨</div>
+          <div class="act-content">
+            <div class="act-title">波多最後晨走：路易一世橋</div>
+            <div class="act-desc">趁退房前在橋上走一趟，清晨無人的橋景最美。</div>
+          </div>
+        </div>
+        <div class="activity">
+          <div class="act-dot transit"></div>
+          <div class="act-time">11:00</div>
+          <div class="act-content">
+            <div class="act-title">River Eyes Suites 退房</div>
+            <div class="act-desc">前往波多 Campanhã 火車站，搭 Uber 或地鐵約 20 分鐘。</div>
+          </div>
+        </div>
+        <div class="activity">
+          <div class="act-dot transit"></div>
+          <div class="act-time">約 12:00</div>
+          <div class="act-content">
+            <div class="act-title">搭火車南下里斯本</div>
+            <div class="act-desc">約 3 小時抵達 Oriente，再搭地鐵至 Saldanha，前往 Holiday Inn Express 辦理 Check-in。</div>
+          </div>
+        </div>
+        <div class="activity">
+          <div class="act-dot highlight"></div>
+          <div class="act-time">下午</div>
+          <div class="act-content">
+            <div class="act-title">Chiado / Bairro Alto 閒逛購物</div>
+            <div class="act-desc">葡式瓷磚、軟木製品、葡萄牙罐頭、Pastéis de Nata 餅乾盒，最後採購伴手禮。</div>
+          </div>
+        </div>
+        <div class="activity">
+          <div class="act-dot highlight"></div>
+          <div class="act-time">傍晚</div>
+          <div class="act-content">
+            <div class="act-title">Miradouro da Graça 最後一次夕陽</div>
+            <div class="act-desc">比 Santa Luzia 遊客少，視野更廣，有 Kiosk 可以坐下來喝一杯。</div>
+          </div>
+        </div>
+        <div class="activity">
+          <div class="act-dot food"></div>
+          <div class="act-time">晚餐</div>
+          <div class="act-content">
+            <div class="act-title">告別晚餐</div>
+            <div class="act-desc">推薦 Cervejaria Ramiro（海鮮）或 Solar dos Presuntos（傳統葡式），需提前訂位。</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- 6/23 返程 -->
-  <div class="day-card">
-    <div class="day-header" onclick="toggle(this)">
-      <span class="day-badge badge-travel">返程日</span>
+  <div class="day-card open">
+    <div class="day-header" onclick="toggleCard(this)">
+      <span class="badge travel">返程日</span>
       <span class="day-title">6/23（三）返回台北</span>
-      <span class="day-sub">LIS → TPE</span>
+      <span class="day-hotel">LIS → TPE</span>
       <span class="chevron">▾</span>
     </div>
     <div class="day-body">
-      <div class="hotel-bar"><i class="ti ti-info-circle" aria-hidden="true"></i> Saldanha → 機場地鐵紅線，約 20 分鐘，班機 14:20，建議 11:00 前到機場。</div>
-      <div class="activity"><div class="dot food"></div><div class="act-time">早晨</div><div class="act-content"><div class="act-title">最後一杯 bica + pastel de nata</div><div class="act-desc">Saldanha 附近任何一家咖啡廳，葡萄牙早餐儀式感十足。</div></div></div>
-      <div class="activity"><div class="dot transit"></div><div class="act-time">約 11:00</div><div class="act-content"><div class="act-title">前往機場</div><div class="act-desc">搭地鐵紅線，Saldanha → São Sebastião → Oriente → 機場，全程約 20 分鐘，非常方便。</div></div></div>
-      <div class="flight-card">
-        <div class="flight-row">
-          <span class="flight-city">里斯本（LIS）</span>
-          <span class="flight-arrow">✈ 返程</span>
-          <span class="flight-city">台北（TPE）</span>
+      <div class="info-box">Saldanha → 機場：地鐵紅線約 20 分鐘，班機 14:20，建議 11:00 前到機場。</div>
+      <div class="activities">
+        <div class="activity">
+          <div class="act-dot food"></div>
+          <div class="act-time">早晨</div>
+          <div class="act-content">
+            <div class="act-title">最後一杯 bica + pastel de nata</div>
+            <div class="act-desc">Saldanha 附近任何一家咖啡廳，葡萄牙早餐儀式感十足。</div>
+          </div>
         </div>
-        <div class="flight-time">6/23 14:20 出發 → 6/24 16:15 抵達</div>
+        <div class="activity">
+          <div class="act-dot transit"></div>
+          <div class="act-time">約 11:00</div>
+          <div class="act-content">
+            <div class="act-title">前往機場</div>
+            <div class="act-desc">搭地鐵紅線，Saldanha → São Sebastião → Oriente → 機場，全程約 20 分鐘。</div>
+          </div>
+        </div>
+      </div>
+      <div class="flight-card" style="margin-top:14px;margin-bottom:0">
+        <div class="flight-row">
+          <span class="flight-city">里斯本 LIS</span>
+          <div class="flight-line">
+            <div class="flight-dash"></div>
+          </div>
+          <span class="flight-city">台北 TPE</span>
+        </div>
+        <div class="flight-time">6/23 14:20 出發 &nbsp;→&nbsp; 6/24 16:15 抵達</div>
       </div>
     </div>
   </div>
+
 </div>
 
 <script>
-function toggle(header) {
-  const body = header.nextElementSibling;
-  const chevron = header.querySelector('.chevron');
-  body.classList.toggle('open');
-  chevron.classList.toggle('open');
+function toggleCard(header) {
+  const card = header.closest('.day-card');
+  card.classList.toggle('open');
 }
 </script>
+</body>
+</html>
