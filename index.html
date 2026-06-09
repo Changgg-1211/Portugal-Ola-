@@ -4,334 +4,139 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>葡萄牙獨旅 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>葡萄牙旅行 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --cream: #F7F3EC;
-    --cream-dark: #EDE8DF;
-    --ink: #1C1A16;
-    --ink-mid: #5A5650;
-    --ink-light: #9B9690;
-    --lis: #2D6E5A;
-    --lis-bg: #EAF4EF;
-    --lis-mid: #7DBFA8;
-    --pto: #4A3F9E;
-    --pto-bg: #EEEDFB;
-    --pto-mid: #9B94D8;
-    --travel: #8A6A3A;
-    --travel-bg: #F5EFE3;
-    --warn: #B35C1E;
-    --warn-bg: #FDF0E6;
-    --info: #1A5C8A;
-    --info-bg: #EAF3FA;
-    --border: #DDD8CF;
-    --gold: #C4973A;
+    --cream: #F7F3EC; --cream-d: #EDE8DF; --ink: #1C1A16; --ink-m: #5A5650; --ink-l: #9B9690;
+    --lis: #2D6E5A; --lis-bg: #EAF4EF; --lis-mid: #7DBFA8;
+    --pto: #4A3F9E; --pto-bg: #EEEDFB; --pto-mid: #9B94D8;
+    --mv: #8A6A3A; --mv-bg: #F5EFE3;
+    --warn: #B35C1E; --warn-bg: #FDF0E6;
+    --info: #1A5C8A; --info-bg: #EAF3FA;
+    --border: #DDD8CF; --gold: #C4973A;
   }
-
   html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); font-size: 14px; line-height: 1.6; }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--cream);
-    color: var(--ink);
-    font-size: 14px;
-    line-height: 1.6;
-    min-height: 100vh;
-  }
-
-  /* Header */
-  .hero {
-    background: var(--ink);
-    color: var(--cream);
-    padding: 52px 24px 44px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(196,151,58,0.18) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero-eyebrow {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 12px;
-  }
-  .hero h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(30px, 6vw, 48px);
-    font-weight: 300;
-    letter-spacing: -0.5px;
-    line-height: 1.15;
-    margin-bottom: 14px;
-  }
-  .hero-sub {
-    font-size: 12px;
-    color: rgba(247,243,236,0.6);
-    letter-spacing: 0.5px;
-  }
-  .route-pills {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 20px;
-    flex-wrap: wrap;
-  }
-  .rpill {
-    font-size: 11px;
-    font-weight: 500;
-    padding: 4px 12px;
-    border-radius: 20px;
-    border: 1px solid;
-  }
+  .hero { background: var(--ink); color: var(--cream); padding: 52px 24px 44px; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(196,151,58,0.18) 0%, transparent 70%); pointer-events: none; }
+  .hero-eyebrow { font-size: 10px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+  .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 6vw, 46px); font-weight: 300; margin-bottom: 10px; }
+  .hero-sub { font-size: 12px; color: rgba(247,243,236,0.55); letter-spacing: 0.5px; }
+  .route-pills { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 18px; flex-wrap: wrap; }
+  .rpill { font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 20px; border: 1px solid; }
   .rpill.l { background: rgba(45,110,90,0.25); border-color: rgba(125,191,168,0.5); color: var(--lis-mid); }
   .rpill.p { background: rgba(74,63,158,0.25); border-color: rgba(155,148,216,0.5); color: var(--pto-mid); }
-  .rarrow { color: rgba(247,243,236,0.35); font-size: 11px; }
+  .rarrow { color: rgba(247,243,236,0.3); font-size: 11px; }
 
-  /* Nav tabs */
-  .nav-wrap { background: var(--ink); border-bottom: 1px solid rgba(255,255,255,0.08); position: sticky; top: 0; z-index: 100; }
-  .nav-inner { display: flex; overflow-x: auto; gap: 0; max-width: 900px; margin: 0 auto; scrollbar-width: none; }
+  .nav-wrap { background: var(--ink); border-bottom: 1px solid rgba(255,255,255,0.07); position: sticky; top: 0; z-index: 100; }
+  .nav-inner { display: flex; overflow-x: auto; max-width: 920px; margin: 0 auto; scrollbar-width: none; }
   .nav-inner::-webkit-scrollbar { display: none; }
-  .nav-btn {
-    flex-shrink: 0;
-    padding: 12px 16px;
-    font-size: 11px;
-    font-weight: 500;
-    color: rgba(247,243,236,0.45);
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    white-space: nowrap;
-    letter-spacing: 0.3px;
-    border-bottom: 2px solid transparent;
-    transition: color .2s, border-color .2s;
-  }
-  .nav-btn:hover { color: rgba(247,243,236,0.8); }
+  .nav-btn { flex-shrink: 0; padding: 12px 15px; font-size: 11px; font-weight: 500; color: rgba(247,243,236,0.4); border: none; background: transparent; cursor: pointer; white-space: nowrap; border-bottom: 2px solid transparent; transition: color .15s, border-color .15s; }
+  .nav-btn:hover { color: rgba(247,243,236,0.75); }
   .nav-btn.active { color: var(--cream); border-bottom-color: var(--gold); }
 
-  /* Main layout */
-  .main { max-width: 900px; margin: 0 auto; padding: 24px 16px 60px; }
-
-  /* Sections */
+  .main { max-width: 920px; margin: 0 auto; padding: 20px 16px 60px; }
   .section { display: none; }
   .section.active { display: block; }
 
-  /* Day card */
-  .dcard {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    margin-bottom: 10px;
-    overflow: hidden;
-  }
-  .dcard-head {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 18px;
-    cursor: pointer;
-    user-select: none;
-    background: #FAFAF8;
-    border-bottom: 1px solid transparent;
-    transition: background .15s;
-  }
-  .dcard-head:hover { background: #F5F3EE; }
+  .dcard { background: #fff; border: 1px solid var(--border); border-radius: 14px; margin-bottom: 8px; overflow: hidden; }
+  .dcard-head { display: flex; align-items: center; gap: 9px; padding: 13px 17px; cursor: pointer; user-select: none; background: #FAFAF7; border-bottom: 1px solid transparent; transition: background .12s; }
+  .dcard-head:hover { background: #F4F1EC; }
   .dcard.open .dcard-head { border-bottom-color: var(--border); }
-  .dbadge {
-    font-size: 10px;
-    font-weight: 500;
-    padding: 3px 9px;
-    border-radius: 20px;
-    letter-spacing: 0.3px;
-    flex-shrink: 0;
-  }
+  .dbadge { font-size: 10px; font-weight: 500; padding: 2px 9px; border-radius: 20px; flex-shrink: 0; }
   .dbadge.l { background: var(--lis-bg); color: var(--lis); }
   .dbadge.p { background: var(--pto-bg); color: var(--pto); }
-  .dbadge.t { background: var(--travel-bg); color: var(--travel); }
+  .dbadge.t { background: var(--mv-bg); color: var(--mv); }
   .dtitle { font-size: 13px; font-weight: 500; color: var(--ink); flex: 1; min-width: 0; }
-  .dhotel { font-size: 11px; color: var(--ink-light); white-space: nowrap; flex-shrink: 0; }
-  .dchev { color: var(--ink-light); font-size: 11px; flex-shrink: 0; transition: transform .2s; }
+  .dhotel { font-size: 11px; color: var(--ink-l); white-space: nowrap; flex-shrink: 0; }
+  .dchev { color: var(--ink-l); font-size: 11px; flex-shrink: 0; transition: transform .18s; }
   .dcard.open .dchev { transform: rotate(180deg); }
-  .dbody { display: none; padding: 16px 18px 18px; }
+  .dbody { display: none; padding: 15px 17px 17px; }
   .dcard.open .dbody { display: block; }
 
-  /* Flight card */
-  .flight-block {
-    background: var(--cream);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 14px 16px;
-    margin-bottom: 14px;
-  }
-  .flight-seg { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
-  .flight-seg:last-of-type { margin-bottom: 0; }
-  .flight-city { font-weight: 500; font-size: 13px; }
-  .flight-line { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; }
-  .flight-dash { width: 100%; border-top: 1px dashed var(--border); position: relative; }
-  .flight-dash::after { content: '✈'; position: absolute; top: -9px; left: 50%; transform: translateX(-50%); font-size: 12px; color: var(--ink-mid); background: var(--cream); padding: 0 4px; }
-  .flight-info { font-size: 11px; color: var(--ink-light); text-align: center; margin-top: 4px; }
-  .transit-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 7px 12px;
-    background: #F5F3EE;
-    border-radius: 6px;
-    margin: 6px 0;
-    font-size: 11px;
-    color: var(--ink-mid);
-  }
+  .fblock { background: var(--cream); border: 1px solid var(--border); border-radius: 10px; padding: 13px 15px; margin-bottom: 13px; }
+  .fseg { display: flex; align-items: center; gap: 10px; margin-bottom: 5px; }
+  .fseg:last-of-type { margin-bottom: 0; }
+  .fcity { font-weight: 500; font-size: 13px; }
+  .fline { flex: 1; position: relative; }
+  .fdash { width: 100%; border-top: 1px dashed var(--border); }
+  .fdash::after { content: '✈'; position: absolute; top: -9px; left: 50%; transform: translateX(-50%); font-size: 12px; color: var(--ink-m); background: var(--cream); padding: 0 3px; }
+  .finfo { font-size: 11px; color: var(--ink-l); text-align: center; margin-top: 5px; }
+  .transit-row { display: flex; gap: 8px; padding: 6px 11px; background: #F0EDE7; border-radius: 6px; margin: 6px 0; font-size: 11px; color: var(--ink-m); line-height: 1.5; }
 
-  /* Activities */
+  .nbox { font-size: 12px; border-radius: 8px; padding: 8px 12px; margin-bottom: 12px; line-height: 1.55; }
+  .nbox.warn { background: var(--warn-bg); color: var(--warn); }
+  .nbox.info { background: var(--info-bg); color: var(--info); }
+  .hotel-bar { font-size: 12px; color: var(--ink-m); background: var(--cream); border-radius: 8px; padding: 7px 12px; margin-bottom: 12px; border-left: 3px solid var(--border); }
+
   .acts { display: flex; flex-direction: column; }
-  .act {
-    display: flex;
-    gap: 10px;
-    padding: 9px 0;
-    border-bottom: 1px solid #F0EDE8;
-    align-items: flex-start;
-  }
+  .act { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid #F0EDE8; align-items: flex-start; }
   .act:last-child { border-bottom: none; padding-bottom: 0; }
   .act-dot { width: 7px; height: 7px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
   .act-dot.d { background: var(--border); }
   .act-dot.h { background: var(--pto); }
   .act-dot.f { background: var(--lis); }
   .act-dot.tr { background: #A89880; }
-  .act-time { font-size: 11px; color: var(--ink-light); min-width: 50px; padding-top: 1px; flex-shrink: 0; }
+  .act-dot.warn { background: var(--warn); }
+  .act-time { font-size: 11px; color: var(--ink-l); min-width: 52px; padding-top: 1px; flex-shrink: 0; }
   .act-body { flex: 1; }
   .act-title { font-size: 13px; font-weight: 500; color: var(--ink); }
-  .act-desc { font-size: 12px; color: var(--ink-mid); margin-top: 2px; line-height: 1.55; }
+  .act-desc { font-size: 12px; color: var(--ink-m); margin-top: 2px; line-height: 1.5; }
   .act-hours { font-size: 11px; color: var(--lis); margin-top: 3px; }
   .act-warn { font-size: 11px; color: var(--warn); margin-top: 3px; }
   .act-tip { font-size: 11px; color: var(--info); margin-top: 3px; }
 
-  /* Notice boxes */
-  .nbox {
-    font-size: 12px;
-    border-radius: 8px;
-    padding: 9px 12px;
-    margin-bottom: 12px;
-    line-height: 1.55;
-  }
-  .nbox.warn { background: var(--warn-bg); color: var(--warn); }
-  .nbox.info { background: var(--info-bg); color: var(--info); }
-
-  /* Hotel bar */
-  .hotel-bar {
-    font-size: 12px;
-    color: var(--ink-mid);
-    background: var(--cream);
-    border-radius: 8px;
-    padding: 8px 12px;
-    margin-bottom: 12px;
-    border-left: 3px solid var(--border);
-  }
-
-  /* Tables */
-  .tbl { width: 100%; border-collapse: collapse; margin-bottom: 12px; font-size: 12px; }
-  .tbl th { text-align: left; font-size: 10px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; color: var(--ink-light); padding: 6px 10px; border-bottom: 1px solid var(--border); }
-  .tbl td { padding: 8px 10px; border-bottom: 1px solid #F0EDE8; color: var(--ink-mid); vertical-align: top; line-height: 1.5; }
+  .tbl { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 8px; }
+  .tbl th { text-align: left; font-size: 10px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; color: var(--ink-l); padding: 6px 10px; border-bottom: 1px solid var(--border); }
+  .tbl td { padding: 8px 10px; border-bottom: 1px solid #F0EDE8; color: var(--ink-m); vertical-align: top; line-height: 1.5; }
   .tbl tr:last-child td { border-bottom: none; }
   .tbl td:first-child { color: var(--ink); font-weight: 500; white-space: nowrap; }
-  .tag { font-size: 10px; font-weight: 500; padding: 2px 7px; border-radius: 20px; display: inline-block; margin-left: 4px; white-space: nowrap; }
+  .tag { font-size: 10px; font-weight: 500; padding: 2px 7px; border-radius: 20px; display: inline-block; margin-left: 4px; }
   .tag.free { background: var(--lis-bg); color: var(--lis); }
   .tag.disc { background: #FFF6E6; color: #8A5800; }
-  .tag.warn { background: var(--warn-bg); color: var(--warn); }
-  .tag.na { background: #F0EDE8; color: var(--ink-mid); }
+  .tag.na { background: #F0EDE8; color: var(--ink-m); }
+  .tag.x2 { background: #FDF0E6; color: var(--warn); }
 
-  /* Card info block */
-  .card-info {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 16px 18px;
-    margin-bottom: 10px;
-  }
-  .card-info h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 17px;
-    font-weight: 600;
-    color: var(--ink);
-    margin-bottom: 12px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--border);
-  }
+  .cinfo { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 15px 17px; margin-bottom: 10px; }
+  .cinfo h3 { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; color: var(--ink); margin-bottom: 11px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
 
-  /* Section header */
-  .sec-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 24px 0 12px;
-  }
-  .sec-header:first-child { margin-top: 0; }
-  .sec-label {
-    font-size: 11px;
-    font-weight: 500;
-    padding: 3px 10px;
-    border-radius: 20px;
-    letter-spacing: 0.3px;
-  }
-  .sec-label.l { background: var(--lis-bg); color: var(--lis); }
-  .sec-label.p { background: var(--pto-bg); color: var(--pto); }
+  .sec-hdr { display: flex; align-items: center; gap: 10px; margin: 20px 0 10px; }
+  .sec-hdr:first-child { margin-top: 0; }
+  .sec-lbl { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; }
+  .sec-lbl.l { background: var(--lis-bg); color: var(--lis); }
+  .sec-lbl.p { background: var(--pto-bg); color: var(--pto); }
   .sec-line { flex: 1; height: 1px; background: var(--border); }
 
-  /* Attraction detail card */
-  .acard {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    margin-bottom: 8px;
-    overflow: hidden;
-  }
-  .acard-head {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 16px;
-    cursor: pointer;
-    user-select: none;
-    background: #FAFAF8;
-    border-bottom: 1px solid transparent;
-  }
-  .acard-head:hover { background: #F5F3EE; }
+  .acard { background: #fff; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 7px; overflow: hidden; }
+  .acard-head { display: flex; align-items: center; gap: 8px; padding: 11px 15px; cursor: pointer; user-select: none; background: #FAFAF7; border-bottom: 1px solid transparent; }
+  .acard-head:hover { background: #F4F1EC; }
   .acard.open .acard-head { border-bottom-color: var(--border); }
   .acard-name { font-size: 13px; font-weight: 500; color: var(--ink); flex: 1; }
-  .acard-price { font-size: 11px; color: var(--ink-mid); white-space: nowrap; }
-  .acard-cv { font-size: 10px; color: var(--ink-light); flex-shrink: 0; transition: transform .2s; }
+  .acard-price { font-size: 11px; color: var(--ink-m); white-space: nowrap; }
+  .acard-cv { font-size: 10px; color: var(--ink-l); flex-shrink: 0; transition: transform .18s; }
   .acard.open .acard-cv { transform: rotate(180deg); }
-  .acard-body { display: none; padding: 12px 16px; }
+  .acard-body { display: none; padding: 11px 15px; }
   .acard.open .acard-body { display: block; }
 
   @media (max-width: 480px) {
-    .hero { padding: 40px 16px 32px; }
+    .hero { padding: 36px 16px 28px; }
     .dhotel { display: none; }
-    .main { padding: 16px 12px 48px; }
+    .main { padding: 14px 12px 48px; }
   }
 </style>
 </head>
 <body>
 
 <div class="hero">
-  <div class="hero-eyebrow">Solo Travel · Portugal · 2026</div>
-  <h1>葡萄牙女生獨旅</h1>
-  <div class="hero-sub">6/17（四）出發 &nbsp;·&nbsp; Emirates 阿聯酋航空 &nbsp;·&nbsp; 杜拜轉機</div>
+  <div class="hero-eyebrow">Portugal Travel · 2026</div>
+  <h1>葡萄牙旅行</h1>
+  <div class="hero-sub">6/17（四）出發 &nbsp;·&nbsp; Emirates 阿聯酋航空 &nbsp;·&nbsp; 杜拜轉機 &nbsp;·&nbsp; 2人同行</div>
   <div class="route-pills">
-    <span class="rpill l">里斯本 2晚</span>
-    <span class="rarrow">→</span>
-    <span class="rpill p">波多 2晚</span>
-    <span class="rarrow">→</span>
+    <span class="rpill l">里斯本 2晚</span><span class="rarrow">→</span>
+    <span class="rpill p">波多 2晚</span><span class="rarrow">→</span>
     <span class="rpill l">里斯本 1晚</span>
   </div>
 </div>
@@ -340,7 +145,7 @@
   <div class="nav-inner">
     <button class="nav-btn active" onclick="showTab('itinerary',this)">行程總覽</button>
     <button class="nav-btn" onclick="showTab('flights',this)">航班資訊</button>
-    <button class="nav-btn" onclick="showTab('tickets',this)">通票 & 換票</button>
+    <button class="nav-btn" onclick="showTab('tickets',this)">通票 &amp; 換票</button>
     <button class="nav-btn" onclick="showTab('attractions',this)">景點詳情</button>
     <button class="nav-btn" onclick="showTab('checklist',this)">預訂清單</button>
     <button class="nav-btn" onclick="showTab('tips',this)">旅行提醒</button>
@@ -349,497 +154,438 @@
 
 <div class="main">
 
-<!-- ═══════════════ TAB: 行程總覽 ═══════════════ -->
+<!-- ═══ 行程總覽 ═══ -->
 <div id="tab-itinerary" class="section active">
 
-  <!-- 6/17 出發 -->
   <div class="dcard open">
     <div class="dcard-head" onclick="tog(this)">
-      <span class="dbadge t">出發日</span>
-      <span class="dtitle">6/17（四）深夜出發</span>
-      <span class="dhotel">TPE → LIS</span>
-      <span class="dchev">▾</span>
+      <span class="dbadge t">出發日</span><span class="dtitle">6/17（四）深夜出發</span>
+      <span class="dhotel">TPE → LIS</span><span class="dchev">▾</span>
     </div>
     <div class="dbody">
-      <div class="flight-block">
-        <div class="flight-seg">
-          <span class="flight-city">台北 TPE</span>
-          <div class="flight-line"><div class="flight-dash"></div></div>
-          <span class="flight-city">杜拜 DXB</span>
-        </div>
-        <div class="flight-info">EK367 &nbsp;|&nbsp; 23:50 → 06:35+1 &nbsp;|&nbsp; A380-800 &nbsp;|&nbsp; 8h 45min</div>
-        <div class="transit-row">🔄 杜拜轉機 2h 15min — DXB 機場大，A380/777 登機口可能相距甚遠，出艙後請快速前往下一登機門</div>
-        <div class="flight-seg" style="margin-top:10px">
-          <span class="flight-city">杜拜 DXB</span>
-          <div class="flight-line"><div class="flight-dash"></div></div>
-          <span class="flight-city">里斯本 LIS</span>
-        </div>
-        <div class="flight-info">EK191 &nbsp;|&nbsp; 06:50 → 12:35 &nbsp;|&nbsp; 777-300ER &nbsp;|&nbsp; 8h 45min</div>
+      <div class="fblock">
+        <div class="fseg"><span class="fcity">台北 TPE</span><div class="fline"><div class="fdash"></div></div><span class="fcity">杜拜 DXB</span></div>
+        <div class="finfo">EK367 &nbsp;|&nbsp; 23:50 → 04:35+1 &nbsp;|&nbsp; A380-800 &nbsp;|&nbsp; 8h 45min</div>
+        <div class="transit-row">🔄 杜拜轉機 2h 15min — A380/777 登機口可能相距甚遠，出艙後請快速前往下一登機門</div>
+        <div class="fseg" style="margin-top:10px"><span class="fcity">杜拜 DXB</span><div class="fline"><div class="fdash"></div></div><span class="fcity">里斯本 LIS</span></div>
+        <div class="finfo">EK191 &nbsp;|&nbsp; 06:50 → 12:35 &nbsp;|&nbsp; 777-300ER &nbsp;|&nbsp; 8h 45min</div>
       </div>
-    </div>
-  </div>
-
-  <!-- 6/18 抵達里斯本 -->
-  <div class="dcard open">
-    <div class="dcard-head" onclick="tog(this)">
-      <span class="dbadge l">里斯本</span>
-      <span class="dtitle">6/18（五）抵達里斯本，Alfama 初探</span>
-      <span class="dhotel">住：The 7 Hotel</span>
-      <span class="dchev">▾</span>
-    </div>
-    <div class="dbody">
-      <div class="hotel-bar">🏨 The 7 Hotel，Baixa（R. Áurea 121）</div>
-      <div class="nbox info">機場入境大廳 Ask Me Lisboa（07:00–22:00）換領 Lisboa Card，搭地鐵進城時啟用，48h 從那刻起計時。</div>
       <div class="acts">
-        <div class="act"><div class="act-dot tr"></div><div class="act-time">12:35</div><div class="act-body"><div class="act-title">抵達里斯本機場</div><div class="act-desc">地鐵紅線 → Oriente，轉綠線 → Baixa-Chiado，步行至 The 7 Hotel（約 30–40 分鐘）</div></div></div>
-        <div class="act"><div class="act-dot tr"></div><div class="act-time">抵達後</div><div class="act-body"><div class="act-title">換領 Lisboa Card 48h</div><div class="act-desc">機場入境大廳 Ask Me Lisboa 換票，出示 email 憑證，約 3 分鐘完成</div></div></div>
-        <div class="act"><div class="act-dot h"></div><div class="act-time">下午</div><div class="act-body"><div class="act-title">Alfama 區漫步 + 28 號復古電車</div><div class="act-desc">Lisboa Card 含電車無限搭，穿梭巷弄感受最古老街區</div></div></div>
-        <div class="act"><div class="act-dot h"></div><div class="act-time">傍晚</div><div class="act-body"><div class="act-title">Miradouro de Santa Luzia</div><div class="act-desc">藍白瓷磚觀景台，俯瞰 Alfama 紅屋頂與塔霍河，黃昏最美</div></div></div>
-        <div class="act"><div class="act-dot f"></div><div class="act-time">晚上</div><div class="act-body"><div class="act-title">Alfama 聽一場 Fado</div><div class="act-desc">小酒館現場演唱配葡萄牙紅酒，旅程最難忘的夜晚之一</div></div></div>
+        <div class="act"><div class="act-dot d"></div><div class="act-time">建議</div><div class="act-body"><div class="act-desc">帶頸枕、壓縮襪，機上補眠應對時差。上機後把手錶調至里斯本時間，抵達後盡量撐到當地 22:00 再睡。</div></div></div>
       </div>
     </div>
   </div>
 
-  <!-- 6/19 里斯本精華 -->
+  <div class="dcard open">
+    <div class="dcard-head" onclick="tog(this)">
+      <span class="dbadge l">里斯本</span><span class="dtitle">6/18（五）抵達里斯本，Alfama 初探</span>
+      <span class="dhotel">住：The 7 Hotel</span><span class="dchev">▾</span>
+    </div>
+    <div class="dbody">
+      <div class="hotel-bar">🏨 The 7 Hotel，Baixa（R. Áurea 121）— 確認雙人房房型</div>
+      <div class="nbox info">機場入境大廳 Ask Me Lisboa（07:00–22:00）換領 2 張 Lisboa Card 48h，搭地鐵進城時啟用，計時從那刻起。</div>
+      <div class="acts">
+        <div class="act"><div class="act-dot tr"></div><div class="act-time">12:35</div><div class="act-body"><div class="act-title">抵達里斯本機場</div><div class="act-desc">換領 2 張 Lisboa Card → 地鐵紅線至 Oriente → 轉綠線至 Baixa-Chiado → 步行至 The 7 Hotel（約 30–40 分鐘）</div></div></div>
+        <div class="act"><div class="act-dot h"></div><div class="act-time">下午</div><div class="act-body"><div class="act-title">Alfama 區漫步 + 28 號復古電車</div><div class="act-desc">Lisboa Card 含電車無限搭，穿梭巷弄感受最古老街區。兩人同行更輕鬆自在。</div></div></div>
+        <div class="act"><div class="act-dot h"></div><div class="act-time">傍晚</div><div class="act-body"><div class="act-title">Miradouro de Santa Luzia</div><div class="act-desc">藍白瓷磚觀景台，俯瞰 Alfama 紅屋頂與塔霍河，黃昏最美。</div></div></div>
+        <div class="act"><div class="act-dot f"></div><div class="act-time">晚上</div><div class="act-body"><div class="act-title">Alfama 聽一場 Fado</div><div class="act-desc">小酒館現場演唱配葡萄牙紅酒，母女一起欣賞最難忘。</div></div></div>
+      </div>
+    </div>
+  </div>
+
   <div class="dcard">
     <div class="dcard-head" onclick="tog(this)">
-      <span class="dbadge l">里斯本</span>
-      <span class="dtitle">6/19（六）里斯本精華 + Belém</span>
-      <span class="dhotel">住：The 7 Hotel</span>
-      <span class="dchev">▾</span>
+      <span class="dbadge l">里斯本</span><span class="dtitle">6/19（六）里斯本精華 + Belém</span>
+      <span class="dhotel">住：The 7 Hotel</span><span class="dchev">▾</span>
     </div>
     <div class="dbody">
       <div class="hotel-bar">🏨 The 7 Hotel，里斯本</div>
-      <div class="nbox warn">⚠️ 熱羅尼莫斯修道院週一休館，6/19（六）是最佳時機，建議下午前往。貝倫塔整修中，可拍外觀不可入內。</div>
+      <div class="nbox warn">⚠️ 修道院週一休館，6/19（六）是最佳時機。貝倫塔整修中，預計 6 月重開，出發前確認 patrimoniocultural.gov.pt。</div>
       <div class="acts">
-        <div class="act"><div class="act-dot h"></div><div class="act-time">09:00</div><div class="act-body"><div class="act-title">聖喬治城堡 Castelo de São Jorge</div><div class="act-desc">360 度俯瞰全城，有孔雀自由漫步。票 €17，Lisboa Card 免費</div><div class="act-hours">🕘 開放 09:00–21:00，最後入場 20:30</div></div></div>
-        <div class="act"><div class="act-dot h"></div><div class="act-time">上午</div><div class="act-body"><div class="act-title">里斯本大教堂 Sé de Lisboa</div><div class="act-desc">1147 年建，城堡山腳步行可達。教堂免費，迴廊 €3，Lisboa Card 折扣</div><div class="act-hours">🕘 開放 09:00–18:30</div></div></div>
-        <div class="act"><div class="act-dot tr"></div><div class="act-time">下午</div><div class="act-body"><div class="act-title">前往 Belém 區</div><div class="act-desc">電車 15E（Lisboa Card 含）或 Uber，約 20–30 分鐘</div></div></div>
-        <div class="act"><div class="act-dot h"></div><div class="act-time">抵達後</div><div class="act-body"><div class="act-title">熱羅尼莫斯修道院 Jerónimos Monastery</div><div class="act-desc">UNESCO 世界遺產，曼努埃爾式石雕。票 €18，Lisboa Card 免費</div><div class="act-hours">🕘 開放 10:00–18:30，最後入場 18:00</div><div class="act-warn">⚠️ 旺季排隊 1–2 小時，Lisboa Card 不等於 skip-the-line，建議不晚於 14:00 抵達</div></div></div>
-        <div class="act"><div class="act-dot f"></div><div class="act-time">下午</div><div class="act-body"><div class="act-title">Pastéis de Belém 正宗蛋撻</div><div class="act-desc">1837 年元祖店，灑肉桂粉配 bica 咖啡</div></div></div>
-        <div class="act"><div class="act-dot h"></div><div class="act-time">傍晚</div><div class="act-body"><div class="act-title">Chiado 逛街 + 卡爾莫修道院廢墟</div><div class="act-desc">地震後空頂廢墟，視覺衝擊極強。票 €7，Lisboa Card 折扣約 €5</div><div class="act-hours">🕘 開放 10:00–19:00（週日休館，6/19 週六 OK）</div><div class="act-warn">⚠️ 需在 19:00 前入場</div></div></div>
+        <div class="act"><div class="act-dot h"></div><div class="act-time">09:00</div><div class="act-body"><div class="act-title">聖喬治城堡 Castelo de São Jorge</div><div class="act-desc">360 度俯瞰全城，有孔雀自由漫步。票 €17/人，2人 €34，Lisboa Card 免費。</div><div class="act-hours">🕘 09:00–21:00，最後入場 20:30</div></div></div>
+        <div class="act"><div class="act-dot h"></div><div class="act-time">約 10:30</div><div class="act-body"><div class="act-title">里斯本大教堂 Sé de Lisboa</div><div class="act-desc">城堡山腳步行可達，順路下山。教堂免費，迴廊 €3/人，Lisboa Card 折扣。</div><div class="act-hours">🕘 09:00–18:30</div></div></div>
+        <div class="act"><div class="act-dot tr"></div><div class="act-time">約 11:00</div><div class="act-body"><div class="act-title">前往 Belém 區</div><div class="act-desc">電車 15E（Lisboa Card 含）或 Uber，約 20–30 分鐘。</div></div></div>
+        <div class="act"><div class="act-dot f"></div><div class="act-time">抵達後</div><div class="act-body"><div class="act-title">Pastéis de Belém 先吃蛋撻</div><div class="act-desc">人潮 11:00 後湧現，先去排隊，兩個人坐下來慢慢吃。</div></div></div>
+        <div class="act"><div class="act-dot h"></div><div class="act-time">下午</div><div class="act-body"><div class="act-title">熱羅尼莫斯修道院 Jerónimos Monastery</div><div class="act-desc">UNESCO 世界遺產。票 €18/人，2人 €36，Lisboa Card 免費。</div><div class="act-hours">🕘 10:00–18:30，最後入場 18:00</div><div class="act-warn">⚠️ 旺季排隊 1–2 小時，建議不晚於 14:00 抵達</div></div></div>
+        <div class="act"><div class="act-dot h"></div><div class="act-time">傍晚</div><div class="act-body"><div class="act-title">回市區 → Chiado 逛街 + 卡爾莫修道院廢墟</div><div class="act-desc">地震後空頂廢墟。票 €7/人，Lisboa Card 折扣約 €5/人。</div><div class="act-hours">🕘 10:00–19:00（週日休館，6/19 週六 OK）</div><div class="act-warn">⚠️ 需在 19:00 前入場</div></div></div>
+        <div class="act"><div class="act-dot f"></div><div class="act-time">21:30</div><div class="act-body"><div class="act-title">Cervejaria Ramiro 晚餐（2人）</div><div class="act-desc">從 Chiado 搭 Uber 約 10 分鐘。</div><div class="act-warn">⚠️ 需提前訂位 2人，押金 €25/人（共 €50）。週六旺季建議提前 1 週（TheFork / 官網）</div></div></div>
       </div>
     </div>
   </div>
 
-  <!-- 6/20 移動日 -->
   <div class="dcard">
     <div class="dcard-head" onclick="tog(this)">
-      <span class="dbadge t">移動日</span>
-      <span class="dtitle">6/20（日）里斯本 → 波多</span>
-      <span class="dhotel">住：River Eyes Suites（Gaia）</span>
-      <span class="dchev">▾</span>
+      <span class="dbadge t">移動日</span><span class="dtitle">6/20（日）里斯本 → 波多</span>
+      <span class="dhotel">住：River Eyes Suites（Gaia）</span><span class="dchev">▾</span>
     </div>
     <div class="dbody">
-      <div class="hotel-bar">🏨 River Eyes Suites，Vila Nova de Gaia（波多對岸，近路易一世橋）</div>
+      <div class="hotel-bar">🏨 River Eyes Suites，Vila Nova de Gaia（波多對岸，近路易一世橋）— 確認雙人房房型</div>
+      <div class="nbox warn">⚠️ 火車從 <strong>Santa Apolónia 站</strong>出發（非 Oriente）。搭地鐵綠線從 Baixa-Chiado 往東一站，約 10 分鐘。</div>
       <div class="acts">
-        <div class="act"><div class="act-dot tr"></div><div class="act-time">11:00</div><div class="act-body"><div class="act-title">The 7 Hotel 退房</div><div class="act-desc">步行或 Uber 前往 Oriente 火車站（約 15–20 分鐘）</div></div></div>
-        <div class="act"><div class="act-dot tr"></div><div class="act-time">約 12:00</div><div class="act-body"><div class="act-title">搭 Alfa Pendular 高速列車北上</div><div class="act-desc">Oriente → Campanhã，約 3 小時，€20–€35</div><div class="act-tip">💡 提前在 cp.pt 訂票，選靠窗座位</div></div></div>
-        <div class="act"><div class="act-dot tr"></div><div class="act-time">約 15:00</div><div class="act-body"><div class="act-title">抵達波多，前往 River Eyes Suites</div><div class="act-desc">從 Campanhã 搭 Uber 或地鐵至 Gaia 河岸</div></div></div>
-        <div class="act"><div class="act-dot h"></div><div class="act-time">下午</div><div class="act-body"><div class="act-title">Ribeira 河岸初探 + 路易一世橋</div><div class="act-desc">住在 Gaia 側，走路就能上橋，傍晚俯瞰波多舊城</div></div></div>
-        <div class="act"><div class="act-dot f"></div><div class="act-time">晚上</div><div class="act-body"><div class="act-title">Gaia 河岸餐廳 + 試喝波特酒</div><div class="act-desc">Graham's、Sandeman 等酒莊</div></div></div>
+        <div class="act"><div class="act-dot warn"></div><div class="act-time">10:30</div><div class="act-body"><div class="act-title">The 7 Hotel 提早退房</div><div class="act-desc">火車 12:00 發車，2人行李較多，建議 10:30 check-out 預留充足時間。</div></div></div>
+        <div class="act"><div class="act-dot tr"></div><div class="act-time">約 10:45</div><div class="act-body"><div class="act-title">前往 Santa Apolónia 火車站</div><div class="act-desc">地鐵綠線 Baixa-Chiado → Santa Apolónia，約 10 分鐘，有電梯可推行李。</div></div></div>
+        <div class="act"><div class="act-dot tr"></div><div class="act-time">12:00</div><div class="act-body"><div class="act-title">Alfa Pendular 出發 → 波多 Campanhã</div><div class="act-desc">約 3 小時，車票已購（2張）。選靠窗相鄰座位。</div></div></div>
+        <div class="act"><div class="act-dot tr"></div><div class="act-time">約 15:10</div><div class="act-body"><div class="act-title">抵達波多，搭 Uber 至 River Eyes Suites</div><div class="act-desc">2人同搭 Uber，Campanhã → Gaia 河岸約 15 分鐘，辦理入住。</div></div></div>
+        <div class="act"><div class="act-dot h"></div><div class="act-time">下午</div><div class="act-body"><div class="act-title">Ribeira 河岸初探 + 路易一世橋</div><div class="act-desc">住在 Gaia 側，走路就能上橋，傍晚俯瞰波多舊城。</div></div></div>
+        <div class="act"><div class="act-dot f"></div><div class="act-time">晚上</div><div class="act-body"><div class="act-title">Gaia 河岸餐廳 + 試喝波特酒</div><div class="act-desc">Graham's、Sandeman 等酒莊，母女一起品酒。</div></div></div>
       </div>
     </div>
   </div>
 
-  <!-- 6/21 波多精華 -->
   <div class="dcard">
     <div class="dcard-head" onclick="tog(this)">
-      <span class="dbadge p">波多</span>
-      <span class="dtitle">6/21（一）波多精華一日遊</span>
-      <span class="dhotel">住：River Eyes Suites</span>
-      <span class="dchev">▾</span>
+      <span class="dbadge p">波多</span><span class="dtitle">6/21（一）波多精華一日遊</span>
+      <span class="dhotel">住：River Eyes Suites</span><span class="dchev">▾</span>
     </div>
     <div class="dbody">
       <div class="hotel-bar">🏨 River Eyes Suites，Gaia</div>
-      <div class="nbox info">Porto Card 1日換票地點在 Sé 大教堂對面旅遊局（09:00–18:00），建議出門第一站先換領。</div>
+      <div class="nbox info">💡 先換 2 張 Porto Card Walker（€7.50/張）+ 2 張 Andante Tour Card（€7.50/張），再去萊羅書店，路線最順。</div>
       <div class="acts">
-        <div class="act"><div class="act-dot h"></div><div class="act-time">10:00</div><div class="act-body"><div class="act-title">萊羅書店 Livraria Lello</div><div class="act-desc">世界最美書店。Silver Ticket €10 可全額折抵書款，Porto Card 不適用</div><div class="act-hours">🕘 週一 10:00 開，平日 09:00–19:30</div><div class="act-warn">⚠️ 必須提前在官網 livrarialello.pt 購票，現場不賣票</div></div></div>
-        <div class="act"><div class="act-dot h"></div><div class="act-time">上午</div><div class="act-body"><div class="act-title">克萊瑞格斯鐘塔 Torre dos Clérigos</div><div class="act-desc">爬 240 階俯瞰波多全城。票 €8，Porto Card 折扣</div><div class="act-hours">🕘 開放 09:00–19:00</div></div></div>
-        <div class="act"><div class="act-dot h"></div><div class="act-time">上午</div><div class="act-body"><div class="act-title">波多大教堂 Sé do Porto</div><div class="act-desc">藍白瓷磚迴廊，俯瞰杜羅河。教堂免費，迴廊 €3，Porto Card 折扣</div><div class="act-hours">🕘 開放 09:00–18:30</div><div class="act-tip">💡 Porto Card 換票旅遊局就在對面，可順道換領</div></div></div>
-        <div class="act"><div class="act-dot f"></div><div class="act-time">午餐</div><div class="act-body"><div class="act-title">嚐 Francesinha</div><div class="act-desc">波多招牌起司肉醬三明治配本地啤酒。推薦 Café Santiago 或 Capa Negra</div></div></div>
-        <div class="act"><div class="act-dot h"></div><div class="act-time">下午</div><div class="act-body"><div class="act-title">Palácio da Bolsa 證券交易所宮</div><div class="act-desc">必看「阿拉伯廳」，強制 30 分鐘導覽。票 €14，Porto Card 折扣</div><div class="act-hours">🕘 開放 09:00–18:30，最後入場 18:00</div><div class="act-warn">⚠️ 建議 16:30 前抵達。館內全程禁止拍照</div></div></div>
-        <div class="act"><div class="act-dot h"></div><div class="act-time">下午</div><div class="act-body"><div class="act-title">聖法蘭西斯科教堂 Igreja de São Francisco</div><div class="act-desc">哥德外觀 × 鋪天蓋地金箔巴洛克內部，含地下墓室。票 €9，Porto Card 折扣 €7</div><div class="act-hours">🕘 開放 09:00–19:00，最後入場 18:30</div><div class="act-warn">⚠️ 教堂內嚴格禁止拍照（含手機）</div></div></div>
-        <div class="act"><div class="act-dot f"></div><div class="act-time">傍晚</div><div class="act-body"><div class="act-title">Ribeira 廣場看夕陽</div><div class="act-desc">河邊喝葡萄牙白酒，看光線打在對岸 Gaia 酒莊</div></div></div>
+        <div class="act"><div class="act-dot tr"></div><div class="act-time">09:00</div><div class="act-body"><div class="act-title">換領 Porto Card Walker × 2 + Andante Tour Card × 2</div><div class="act-desc">Sé 大教堂對面旅遊局（09:00 開，Calçada Dom Pedro Pitões 15）</div></div></div>
+        <div class="act"><div class="act-dot h"></div><div class="act-time">09:15</div><div class="act-body"><div class="act-title">波多大教堂 Sé do Porto</div><div class="act-desc">換票後順道進去。教堂免費，迴廊 €3/人，Porto Card 折扣。</div><div class="act-hours">🕘 09:00–18:30</div></div></div>
+        <div class="act"><div class="act-dot h"></div><div class="act-time">10:00</div><div class="act-body"><div class="act-title">萊羅書店 Livraria Lello</div><div class="act-desc">週一 10:00 才開。Silver Ticket €10/人 × 2 = €20，可全額折抵書款。Porto Card 不適用。</div><div class="act-warn">⚠️ 必須提前在 livrarialello.pt 購票 2 張，現場不賣票</div></div></div>
+        <div class="act"><div class="act-dot h"></div><div class="act-time">上午</div><div class="act-body"><div class="act-title">克萊瑞格斯鐘塔 Torre dos Clérigos</div><div class="act-desc">書店步行 3 分鐘。爬 240 階俯瞰全城。票 €8/人，Porto Card 50% off → €4/人，2人 €8。</div><div class="act-hours">🕘 09:00–19:00</div></div></div>
+        <div class="act"><div class="act-dot f"></div><div class="act-time">午餐</div><div class="act-body"><div class="act-title">嚐 Francesinha</div><div class="act-desc">波多招牌起司肉醬三明治配本地啤酒。推薦 Café Santiago 或 Capa Negra。</div></div></div>
+        <div class="act"><div class="act-dot h"></div><div class="act-time">下午</div><div class="act-body"><div class="act-title">Palácio da Bolsa 證券交易所宮</div><div class="act-desc">必看「阿拉伯廳」，強制 30 分鐘導覽。票 €14/人，Porto Card 25% off → €10.50/人，2人 €21。</div><div class="act-hours">🕘 09:00–18:30，最後入場 18:00</div><div class="act-warn">⚠️ 建議 16:30 前抵達。館內全程禁止拍照。</div></div></div>
+        <div class="act"><div class="act-dot h"></div><div class="act-time">下午</div><div class="act-body"><div class="act-title">聖法蘭西斯科教堂 Igreja de São Francisco</div><div class="act-desc">哥德外觀 × 金箔巴洛克內部，含地下墓室。票 €9/人，Porto Card 50% off → €4.50/人，2人 €9。</div><div class="act-hours">🕘 09:00–19:00，最後入場 18:30</div><div class="act-warn">⚠️ 教堂內嚴格禁止拍照（含手機）</div></div></div>
+        <div class="act"><div class="act-dot f"></div><div class="act-time">傍晚</div><div class="act-body"><div class="act-title">Ribeira 廣場看夕陽</div><div class="act-desc">河邊喝葡萄牙白酒，看光線打在對岸 Gaia 酒莊，波多最美的時刻。</div></div></div>
       </div>
     </div>
   </div>
 
-  <!-- 6/22 移動日 -->
   <div class="dcard">
     <div class="dcard-head" onclick="tog(this)">
-      <span class="dbadge t">移動日</span>
-      <span class="dtitle">6/22（二）波多 → 里斯本，最後一晚</span>
-      <span class="dhotel">住：Holiday Inn Saldanha</span>
-      <span class="dchev">▾</span>
+      <span class="dbadge t">移動日</span><span class="dtitle">6/22（二）波多 → 里斯本，最後一晚</span>
+      <span class="dhotel">住：Holiday Inn Saldanha</span><span class="dchev">▾</span>
     </div>
     <div class="dbody">
-      <div class="hotel-bar">🏨 Holiday Inn Express Lisbon – Plaza Saldanha（近機場地鐵）</div>
+      <div class="hotel-bar">🏨 Holiday Inn Express Lisbon – Plaza Saldanha — 確認雙人房房型</div>
+      <div class="nbox warn">⚠️ 火車 11:40 出發，2人行李較多，退房到 Campanhã 時間緊，建議 10:30 check-out 直接搭 Uber。</div>
       <div class="acts">
-        <div class="act"><div class="act-dot h"></div><div class="act-time">早晨</div><div class="act-body"><div class="act-title">波多最後晨走：路易一世橋</div><div class="act-desc">清晨無人的橋景最美</div></div></div>
-        <div class="act"><div class="act-dot tr"></div><div class="act-time">11:00</div><div class="act-body"><div class="act-title">River Eyes Suites 退房</div><div class="act-desc">前往 Campanhã 火車站（Uber 或地鐵約 20 分鐘）</div></div></div>
-        <div class="act"><div class="act-dot tr"></div><div class="act-time">約 12:00</div><div class="act-body"><div class="act-title">搭 Alfa Pendular 南下里斯本</div><div class="act-desc">約 3 小時，提前在 cp.pt 訂票</div></div></div>
-        <div class="act"><div class="act-dot tr"></div><div class="act-time">約 15:00</div><div class="act-body"><div class="act-title">抵達里斯本，Check-in Holiday Inn Saldanha</div></div></div>
-        <div class="act"><div class="act-dot h"></div><div class="act-time">下午</div><div class="act-body"><div class="act-title">Chiado / Bairro Alto 閒逛購物</div><div class="act-desc">葡式瓷磚、軟木製品、罐頭、Pastéis de Nata 餅乾盒</div></div></div>
-        <div class="act"><div class="act-dot h"></div><div class="act-time">傍晚</div><div class="act-body"><div class="act-title">Miradouro da Graça 最後一次夕陽</div><div class="act-desc">遊客少、視野廣，有 Kiosk 可以坐下喝一杯</div></div></div>
-        <div class="act"><div class="act-dot f"></div><div class="act-time">晚餐</div><div class="act-body"><div class="act-title">告別晚餐</div><div class="act-desc">推薦 Cervejaria Ramiro（海鮮）或 Solar dos Presuntos（傳統葡式），需提前訂位</div></div></div>
+        <div class="act"><div class="act-dot h"></div><div class="act-time">早晨</div><div class="act-body"><div class="act-title">波多最後晨走：路易一世橋</div><div class="act-desc">清晨無人的橋景最美，母女一起走最有感。</div></div></div>
+        <div class="act"><div class="act-dot warn"></div><div class="act-time">10:30</div><div class="act-body"><div class="act-title">River Eyes Suites 提早退房</div><div class="act-desc">前一晚行李整理好，隔天出門只需拿包走。</div></div></div>
+        <div class="act"><div class="act-dot tr"></div><div class="act-time">約 11:00</div><div class="act-body"><div class="act-title">搭 Uber 前往 Campanhã 火車站</div><div class="act-desc">2人同搭，約 15–20 分鐘，不建議拖行李搭地鐵。</div></div></div>
+        <div class="act"><div class="act-dot tr"></div><div class="act-time">11:40</div><div class="act-body"><div class="act-title">Alfa Pendular 出發 → 里斯本 Oriente</div><div class="act-desc">約 3 小時，車票已購（2張）。</div></div></div>
+        <div class="act"><div class="act-dot tr"></div><div class="act-time">約 14:50</div><div class="act-body"><div class="act-title">抵達里斯本 Oriente，前往 Holiday Inn Saldanha</div><div class="act-desc">地鐵紅線 Oriente → Saldanha，約 20 分鐘，辦理 Check-in。</div></div></div>
+        <div class="act"><div class="act-dot h"></div><div class="act-time">下午</div><div class="act-body"><div class="act-title">Chiado / Bairro Alto 閒逛購物</div><div class="act-desc">葡式瓷磚、軟木製品、罐頭、Pastéis de Nata 餅乾盒，母女一起採購伴手禮。</div></div></div>
+        <div class="act"><div class="act-dot h"></div><div class="act-time">傍晚</div><div class="act-body"><div class="act-title">Miradouro da Graça 最後一次夕陽</div><div class="act-desc">遊客少、視野廣，有 Kiosk 可以坐下喝一杯。</div></div></div>
+        <div class="act"><div class="act-dot f"></div><div class="act-time">晚餐</div><div class="act-body"><div class="act-title">告別晚餐（2人）</div><div class="act-desc">推薦 Solar dos Presuntos（傳統葡式）或 Sea Me Peixaria（海鮮），需提前訂位 2人。</div></div></div>
       </div>
     </div>
   </div>
 
-  <!-- 6/23 返程 -->
   <div class="dcard">
     <div class="dcard-head" onclick="tog(this)">
-      <span class="dbadge t">返程日</span>
-      <span class="dtitle">6/23（三）返回台北</span>
-      <span class="dhotel">LIS → TPE</span>
-      <span class="dchev">▾</span>
+      <span class="dbadge t">返程日</span><span class="dtitle">6/23（三）返回台北</span>
+      <span class="dhotel">LIS → TPE</span><span class="dchev">▾</span>
     </div>
     <div class="dbody">
-      <div class="nbox info">Saldanha 搭地鐵紅線直達機場約 20 分鐘。班機 14:20，建議 11:00 前到機場。</div>
+      <div class="nbox info">Saldanha 搭地鐵紅線直達機場約 20 分鐘，班機 14:20，建議 11:00 前到機場。</div>
       <div class="acts">
-        <div class="act"><div class="act-dot f"></div><div class="act-time">早晨</div><div class="act-body"><div class="act-title">最後一杯 bica + pastel de nata</div><div class="act-desc">Saldanha 附近任何一家咖啡廳</div></div></div>
-        <div class="act"><div class="act-dot tr"></div><div class="act-time">約 11:00</div><div class="act-body"><div class="act-title">前往機場</div><div class="act-desc">地鐵紅線：Saldanha → Oriente → 機場，全程約 20 分鐘</div></div></div>
+        <div class="act"><div class="act-dot f"></div><div class="act-time">早晨</div><div class="act-body"><div class="act-title">最後一杯 bica + pastel de nata</div><div class="act-desc">Saldanha 附近咖啡廳，葡萄牙早餐最後一次儀式感。</div></div></div>
+        <div class="act"><div class="act-dot tr"></div><div class="act-time">約 11:00</div><div class="act-body"><div class="act-title">前往機場</div><div class="act-desc">地鐵紅線：Saldanha → Oriente → 機場，約 20 分鐘。</div></div></div>
       </div>
-      <div class="flight-block" style="margin-top:12px;margin-bottom:0">
-        <div class="flight-seg">
-          <span class="flight-city">里斯本 LIS</span>
-          <div class="flight-line"><div class="flight-dash"></div></div>
-          <span class="flight-city">杜拜 DXB</span>
-        </div>
-        <div class="flight-info">EK192 &nbsp;|&nbsp; 14:20 → 01:15+1 &nbsp;|&nbsp; 777-300ER &nbsp;|&nbsp; 7h 55min</div>
-        <div class="transit-row">🔄 杜拜轉機 2h 30min（凌晨 01:15–03:45）— 直接前往登機門候機</div>
-        <div class="flight-seg" style="margin-top:10px">
-          <span class="flight-city">杜拜 DXB</span>
-          <div class="flight-line"><div class="flight-dash"></div></div>
-          <span class="flight-city">台北 TPE</span>
-        </div>
-        <div class="flight-info">EK366 &nbsp;|&nbsp; 03:45 → 16:15 &nbsp;|&nbsp; A380-800 &nbsp;|&nbsp; 8h 30min</div>
+      <div class="fblock" style="margin-top:12px;margin-bottom:0">
+        <div class="fseg"><span class="fcity">里斯本 LIS</span><div class="fline"><div class="fdash"></div></div><span class="fcity">杜拜 DXB</span></div>
+        <div class="finfo">EK192 &nbsp;|&nbsp; 14:20 → 01:15+1 &nbsp;|&nbsp; 777-300ER &nbsp;|&nbsp; 7h 55min</div>
+        <div class="transit-row">🔄 杜拜轉機 2h 30min（凌晨）— 直接前往登機門休息</div>
+        <div class="fseg" style="margin-top:10px"><span class="fcity">杜拜 DXB</span><div class="fline"><div class="fdash"></div></div><span class="fcity">台北 TPE</span></div>
+        <div class="finfo">EK366 &nbsp;|&nbsp; 03:45 → 16:15 &nbsp;|&nbsp; A380-800 &nbsp;|&nbsp; 8h 30min</div>
       </div>
     </div>
   </div>
+</div>
 
-</div><!-- end tab-itinerary -->
-
-<!-- ═══════════════ TAB: 航班資訊 ═══════════════ -->
+<!-- ═══ 航班資訊 ═══ -->
 <div id="tab-flights" class="section">
-  <div class="card-info">
+  <div class="cinfo">
     <h3>✈️ 去程：台北 → 里斯本</h3>
     <table class="tbl">
       <tr><th>航段</th><th>航班</th><th>時間</th><th>機型</th></tr>
       <tr><td>TPE → DXB</td><td>EK367</td><td>6/17 23:50 → 6/18 04:35（8h 45min）</td><td>A380-800</td></tr>
-      <tr><td>🔄 杜拜轉機</td><td>—</td><td colspan="2">等待 2h 15min — A/B 與 C/D 登機口距離遠，快速前往</td></tr>
+      <tr><td>🔄 杜拜轉機</td><td>—</td><td colspan="2">等待 2h 15min — 出艙後快速前往下一登機門</td></tr>
       <tr><td>DXB → LIS</td><td>EK191</td><td>6/18 06:50 → 12:35（8h 45min）</td><td>777-300ER</td></tr>
     </table>
-    <div class="nbox warn">⚠️ 轉機只有 2h 15min，出艙後立刻看指示牌找下一個登機門，不要在免稅區逗留太久。</div>
+    <div class="nbox warn" style="margin-top:8px">⚠️ 轉機僅 2h 15min，出艙後不要逗留。</div>
   </div>
-  <div class="card-info">
+  <div class="cinfo">
     <h3>✈️ 回程：里斯本 → 台北</h3>
     <table class="tbl">
       <tr><th>航段</th><th>航班</th><th>時間</th><th>機型</th></tr>
       <tr><td>LIS → DXB</td><td>EK192</td><td>6/23 14:20 → 6/24 01:15（7h 55min）</td><td>777-300ER</td></tr>
-      <tr><td>🔄 杜拜轉機</td><td>—</td><td colspan="2">等待 2h 30min（凌晨）— 直接前往登機門休息</td></tr>
+      <tr><td>🔄 杜拜轉機</td><td>—</td><td colspan="2">等待 2h 30min（凌晨 01:15–03:45）</td></tr>
       <tr><td>DXB → TPE</td><td>EK366</td><td>6/24 03:45 → 16:15（8h 30min）</td><td>A380-800</td></tr>
     </table>
   </div>
-  <div class="card-info">
+  <div class="cinfo">
     <h3>🛫 長途飛行舒適建議</h3>
     <table class="tbl">
-      <tr><th>項目</th><th>建議</th></tr>
-      <tr><td>壓縮襪</td><td>全程穿著，預防深靜脈血栓（DVT）</td></tr>
+      <tr><td>壓縮襪</td><td>全程穿著，預防深靜脈血栓</td></tr>
       <tr><td>頸枕</td><td>側邊支撐型效果最好</td></tr>
       <tr><td>保濕</td><td>機艙濕度僅 20%，保濕噴霧 + 護唇膏起飛後就用</td></tr>
       <tr><td>補水</td><td>每小時 200ml，避免咖啡因、酒精</td></tr>
       <tr><td>走動</td><td>每 1–2 小時起身走動，預防水腫</td></tr>
-      <tr><td>時差調整</td><td>上機後把手錶調為里斯本時間（-7h）；抵達後撐到當地 22:00 再睡</td></tr>
-      <tr><td>隨身行李</td><td>換洗衣物放隨身，以防托運行李延誤</td></tr>
+      <tr><td>時差調整</td><td>上機後調為里斯本時間（-7h）；抵達後撐到當地 22:00 再睡</td></tr>
     </table>
   </div>
 </div>
 
-<!-- ═══════════════ TAB: 通票 & 換票 ═══════════════ -->
+<!-- ═══ 通票 & 換票 ═══ -->
 <div id="tab-tickets" class="section">
-  <div class="card-info">
-    <h3>🟢 Lisboa Card 48h（€39）</h3>
+  <div class="cinfo">
+    <h3>🟢 Lisboa Card 48h（€39/張 × 2 = €78）</h3>
     <table class="tbl">
-      <tr><th>項目</th><th>說明</th></tr>
-      <tr><td>購買</td><td>提前在 lisboacard.org 購買，收到 email 憑證</td></tr>
-      <tr><td>換票地點</td><td>① <strong>機場入境大廳 Ask Me Lisboa</strong>（07:00–22:00）← 6/18 抵達時直接換，最方便<br>② Terreiro do Paço（10:00–19:00）<br>③ Cais do Sodré、Rossio 等 Ask Me Lisboa 據點</td></tr>
-      <tr><td>啟用時機</td><td><strong>第一次使用時才開始計時</strong>（搭地鐵或進景點）。建議進地鐵閘門時啟用，48h 從那刻起算</td></tr>
-      <tr><td>包含</td><td>地鐵、電車（含 28 號）、巴士無限搭；52 個景點免費或折扣；每個景點只能使用一次</td></tr>
-      <tr><td>免費景點</td><td>聖喬治城堡（€17）、熱羅尼莫斯修道院（€18）</td></tr>
-      <tr><td>折扣景點</td><td>卡爾莫修道院約 €5（原 €7）、里斯本大教堂迴廊折扣</td></tr>
+      <tr><td>購買</td><td>lisboacard.org 提前各購一張，收到 email 憑證</td></tr>
+      <tr><td>換票地點</td><td>① <strong>機場入境大廳 Ask Me Lisboa</strong>（07:00–22:00）← 6/18 抵達時直接換 2 張<br>② Terreiro do Paço（10:00–19:00）</td></tr>
+      <tr><td>啟用時機</td><td>各自第一次使用時才開始計時，兩張分開啟用</td></tr>
+      <tr><td>免費景點</td><td>聖喬治城堡 €17/人、熱羅尼莫斯修道院 €18/人 → 2人共省 €70</td></tr>
+      <tr><td>包含</td><td>地鐵、電車（含 28 號）、巴士無限搭；52 景點免費或折扣</td></tr>
     </table>
-    <div class="nbox info">💡 城堡 €17 + 修道院 €18 + 卡爾莫約 €5 + 地鐵數趟 = 輕鬆超過 €39，非常划算。</div>
+    <div class="nbox info" style="margin-top:8px">💡 2人城堡 €34 + 修道院 €36 + 卡爾莫 €10 + 電車 + 地鐵 = 遠超 €78，非常划算。</div>
   </div>
-  <div class="card-info">
-    <h3>🟣 Porto Card 1日含交通（€15）</h3>
+  <div class="cinfo">
+    <h3>🟣 Porto Card Walker × 2（€15）+ Andante Tour Card × 2（€15）</h3>
+    <div class="nbox warn" style="margin-bottom:10px">⚠️ 2026 年 3 月底起含交通版 Porto Card 已停售，改為 Walker + Andante 組合。</div>
     <table class="tbl">
-      <tr><th>項目</th><th>說明</th></tr>
-      <tr><td>購買</td><td>portocard.com 或現場購買</td></tr>
-      <tr><td>換票地點</td><td>① <strong>Sé 大教堂對面旅遊局</strong> Calçada Dom Pedro Pitões 15（09:00–18:00）← 順路，換領後直接逛大教堂<br>② 波多機場、主要旅遊諮詢中心</td></tr>
-      <tr><td>啟用時機</td><td>第一次使用時才啟用，建議 6/21 早上出門後換領</td></tr>
-      <tr><td>包含</td><td>地鐵、市區巴士無限搭；Clérigos、Sé、Palácio da Bolsa、São Francisco 等折扣</td></tr>
-      <tr><td>不含</td><td>歷史電車、纜車、萊羅書店</td></tr>
+      <tr><td>Porto Card 購買</td><td>portocard.city 線上各購一張</td></tr>
+      <tr><td>換票地點</td><td>Sé 大教堂對面旅遊局（09:00–18:00）← 6/21 早上第一站，兩張一起換</td></tr>
+      <tr><td>Andante 購買</td><td>波多地鐵站現場購買</td></tr>
+      <tr><td>2人折扣效益</td><td>Clérigos 2人省 €8、São Francisco 2人省 €9 → 合計省約 €20，遠超 €15 通票費用</td></tr>
     </table>
-    <div class="nbox warn">⚠️ 萊羅書店 Porto Card 不適用，需另行在官網購票。</div>
   </div>
 </div>
 
-<!-- ═══════════════ TAB: 景點詳情 ═══════════════ -->
+<!-- ═══ 景點詳情 ═══ -->
 <div id="tab-attractions" class="section">
-
-  <div class="sec-header"><span class="sec-label l">里斯本景點</span><div class="sec-line"></div></div>
-
+  <div class="sec-hdr"><span class="sec-lbl l">里斯本景點</span><div class="sec-line"></div></div>
   <div class="acard open">
     <div class="acard-head" onclick="atog(this)">
       <div class="acard-name">聖喬治城堡 Castelo de São Jorge</div>
-      <div class="acard-price">€17 → <span class="tag free">Lisboa Card 免費</span></div>
-      <div class="acard-cv">▾</div>
+      <div class="acard-price">€17/人 → <span class="tag free">Lisboa Card 免費</span></div><div class="acard-cv">▾</div>
     </div>
     <div class="acard-body">
       <table class="tbl">
         <tr><td>開放時間</td><td>每日 09:00–21:00（3–10月）；最後入場 20:30</td></tr>
         <tr><td>休館</td><td>1/1、5/1、12/24、12/25、12/31</td></tr>
-        <tr><td>換票方式</td><td>直接出示 Lisboa Card 實體卡進場</td></tr>
-        <tr><td>注意事項</td><td>建議 09:00 開門時進場，人最少；傍晚城牆走道可能提早關閉</td></tr>
+        <tr><td>換票方式</td><td>出示 Lisboa Card 實體卡進場（每人一張）</td></tr>
       </table>
     </div>
   </div>
-
   <div class="acard">
     <div class="acard-head" onclick="atog(this)">
       <div class="acard-name">熱羅尼莫斯修道院 Jerónimos Monastery</div>
-      <div class="acard-price">€18 → <span class="tag free">Lisboa Card 免費</span></div>
-      <div class="acard-cv">▾</div>
+      <div class="acard-price">€18/人 → <span class="tag free">Lisboa Card 免費</span></div><div class="acard-cv">▾</div>
     </div>
     <div class="acard-body">
       <table class="tbl">
-        <tr><td>開放時間</td><td>週二–日 10:00–18:30（5–9月）；最後入場 18:00</td></tr>
+        <tr><td>開放時間</td><td>週二–日 10:00–18:30；最後入場 18:00</td></tr>
         <tr><td>休館</td><td><strong>週一休館</strong>、1/1、復活節日、5/1、6/13、12/25</td></tr>
-        <tr><td>換票方式</td><td>出示 Lisboa Card 走專屬通道，仍需等候入場</td></tr>
-        <tr><td>注意事項</td><td>⚠️ 旺季排隊 60–120 分鐘，Lisboa Card 不等於 skip-the-line，建議 10:00 前抵達。教堂（Vasco da Gama 墓）西側入口免費進入</td></tr>
+        <tr><td>注意事項</td><td>⚠️ 旺季排隊 60–120 分鐘，Lisboa Card 不 skip-the-line，建議 10:00 前抵達</td></tr>
       </table>
     </div>
   </div>
-
   <div class="acard">
     <div class="acard-head" onclick="atog(this)">
       <div class="acard-name">卡爾莫修道院考古博物館 Carmo</div>
-      <div class="acard-price">€7 → <span class="tag disc">Lisboa Card 約 €5</span></div>
-      <div class="acard-cv">▾</div>
+      <div class="acard-price">€7/人 → <span class="tag disc">Lisboa Card 約 €5/人</span></div><div class="acard-cv">▾</div>
     </div>
     <div class="acard-body">
       <table class="tbl">
-        <tr><td>開放時間</td><td>週一–六 10:00–19:00（5–10月）；最後入場 18:40</td></tr>
+        <tr><td>開放時間</td><td>週一–六 10:00–19:00；最後入場 18:40</td></tr>
         <tr><td>休館</td><td><strong>週日全年休館</strong>、1/1、5/1、12/25</td></tr>
-        <tr><td>換票方式</td><td>現場出示 Lisboa Card，支付折扣後票價</td></tr>
-        <tr><td>注意事項</td><td>可從聖塔茹斯塔電梯上層步行至此；傍晚光線最美</td></tr>
+        <tr><td>注意事項</td><td>傍晚光線最美；6/19 週六 OK</td></tr>
       </table>
     </div>
   </div>
-
   <div class="acard">
     <div class="acard-head" onclick="atog(this)">
       <div class="acard-name">里斯本大教堂 Sé de Lisboa</div>
-      <div class="acard-price">教堂免費；迴廊 €3</div>
-      <div class="acard-cv">▾</div>
+      <div class="acard-price">教堂免費；迴廊 €3/人</div><div class="acard-cv">▾</div>
     </div>
     <div class="acard-body">
       <table class="tbl">
         <tr><td>開放時間</td><td>每日 09:00–18:30（4–10月）</td></tr>
-        <tr><td>換票方式</td><td>教堂直接進入免費；迴廊現場購票，出示 Lisboa Card 享折扣</td></tr>
+        <tr><td>換票方式</td><td>教堂直接進入；迴廊現場購票，出示 Lisboa Card 享折扣</td></tr>
       </table>
     </div>
   </div>
 
-  <div class="sec-header" style="margin-top:20px"><span class="sec-label p">波多景點</span><div class="sec-line"></div></div>
-
+  <div class="sec-hdr" style="margin-top:20px"><span class="sec-lbl p">波多景點</span><div class="sec-line"></div></div>
   <div class="acard">
     <div class="acard-head" onclick="atog(this)">
       <div class="acard-name">萊羅書店 Livraria Lello</div>
-      <div class="acard-price">€10 <span class="tag na">Porto Card 不適用</span></div>
-      <div class="acard-cv">▾</div>
+      <div class="acard-price">€10/人 × 2 = €20 <span class="tag na">Porto Card 不適用</span></div><div class="acard-cv">▾</div>
     </div>
     <div class="acard-body">
       <table class="tbl">
-        <tr><td>開放時間</td><td>平日 09:00–19:30；週一 10:00 開</td></tr>
-        <tr><td>休館</td><td>1/1、復活節日、5/1、<strong>6/24 聖若望節</strong>、12/25</td></tr>
-        <tr><td>換票方式</td><td>必須提前在 livrarialello.pt 購票，選時段入場，手機出示 QR code</td></tr>
-        <tr><td>注意事項</td><td>⚠️ 現場不賣票。€10 可全額折抵書款，買本書等於免費入場</td></tr>
+        <tr><td>開放時間</td><td>平日 09:00–19:30；<strong>週一 10:00 開</strong></td></tr>
+        <tr><td>換票方式</td><td>必須提前在 livrarialello.pt 購 2 張票，手機出示 QR code</td></tr>
+        <tr><td>注意事項</td><td>⚠️ 現場不賣票。€10 可全額折抵書款</td></tr>
       </table>
     </div>
   </div>
-
   <div class="acard">
     <div class="acard-head" onclick="atog(this)">
       <div class="acard-name">克萊瑞格斯鐘塔 Torre dos Clérigos</div>
-      <div class="acard-price">€8 → <span class="tag disc">Porto Card 折扣</span></div>
-      <div class="acard-cv">▾</div>
+      <div class="acard-price">€8/人 → <span class="tag disc">Porto Card 50% off → €4/人（2人 €8）</span></div><div class="acard-cv">▾</div>
     </div>
     <div class="acard-body">
       <table class="tbl">
-        <tr><td>開放時間</td><td>每日 09:00–19:00；暑期延長至 23:00</td></tr>
-        <tr><td>換票方式</td><td>現場出示 Porto Card 享折扣；或提前在 clerigos.pt 購票</td></tr>
-        <tr><td>注意事項</td><td>240 階窄梯，頂部空間小，人多時輪流上去；距萊羅書店步行 3 分鐘</td></tr>
+        <tr><td>開放時間</td><td>每日 09:00–19:00</td></tr>
+        <tr><td>注意事項</td><td>240 階窄梯；距萊羅書店步行 3 分鐘</td></tr>
       </table>
     </div>
   </div>
-
   <div class="acard">
     <div class="acard-head" onclick="atog(this)">
       <div class="acard-name">波多大教堂 Sé do Porto</div>
-      <div class="acard-price">教堂免費；迴廊 €3 → <span class="tag disc">Porto Card 折扣</span></div>
-      <div class="acard-cv">▾</div>
+      <div class="acard-price">教堂免費；迴廊 €3/人 → <span class="tag disc">Porto Card 折扣</span></div><div class="acard-cv">▾</div>
     </div>
     <div class="acard-body">
       <table class="tbl">
         <tr><td>開放時間</td><td>每日 09:00–18:30（4–10月）</td></tr>
-        <tr><td>換票方式</td><td>現場購票，出示 Porto Card 享折扣</td></tr>
-        <tr><td>注意事項</td><td>Porto Card 換票旅遊局就在教堂對面，可一起搞定</td></tr>
+        <tr><td>注意事項</td><td>Porto Card 換票旅遊局就在對面，同時換領</td></tr>
       </table>
     </div>
   </div>
-
   <div class="acard">
     <div class="acard-head" onclick="atog(this)">
       <div class="acard-name">Palácio da Bolsa 證券交易所宮</div>
-      <div class="acard-price">€14 → <span class="tag disc">Porto Card 折扣</span></div>
-      <div class="acard-cv">▾</div>
+      <div class="acard-price">€14/人 → <span class="tag disc">Porto Card 25% off → €10.50/人（2人 €21）</span></div><div class="acard-cv">▾</div>
     </div>
     <div class="acard-body">
       <table class="tbl">
-        <tr><td>開放時間</td><td>週二–日 09:00–18:30；最後入場 18:00</td></tr>
-        <tr><td>休館</td><td><strong>週一休館</strong>（6/21 週一，但開放確認）</td></tr>
-        <tr><td>換票方式</td><td>現場出示 Porto Card；強制 30 分鐘導覽制，需等候下一場次</td></tr>
-        <tr><td>注意事項</td><td>⚠️ 建議 16:30 前抵達。館內全程禁止拍照</td></tr>
+        <tr><td>開放時間</td><td>每日 09:00–18:30；最後入場 18:00</td></tr>
+        <tr><td>注意事項</td><td>⚠️ 建議 16:30 前抵達。強制 30 分鐘導覽。館內全程禁止拍照</td></tr>
       </table>
     </div>
   </div>
-
   <div class="acard">
     <div class="acard-head" onclick="atog(this)">
       <div class="acard-name">聖法蘭西斯科教堂 Igreja de São Francisco</div>
-      <div class="acard-price">€9 → <span class="tag disc">Porto Card €7</span></div>
-      <div class="acard-cv">▾</div>
+      <div class="acard-price">€9/人 → <span class="tag disc">Porto Card 50% off → €4.50/人（2人 €9）</span></div><div class="acard-cv">▾</div>
     </div>
     <div class="acard-body">
       <table class="tbl">
-        <tr><td>開放時間</td><td>每日 09:00–19:00（3–10月）；最後入場 18:30</td></tr>
-        <tr><td>換票方式</td><td>博物館入口購票，出示 Porto Card 享折扣</td></tr>
-        <tr><td>注意事項</td><td>⚠️ 教堂內嚴格禁止拍照（含手機）。含地下墓室，有玻璃地板透視人骨</td></tr>
+        <tr><td>開放時間</td><td>每日 09:00–19:00；最後入場 18:30</td></tr>
+        <tr><td>注意事項</td><td>⚠️ 教堂內嚴格禁止拍照（含手機）。含地下墓室</td></tr>
       </table>
     </div>
   </div>
-
 </div>
 
-<!-- ═══════════════ TAB: 預訂清單 ═══════════════ -->
+<!-- ═══ 預訂清單 ═══ -->
 <div id="tab-checklist" class="section">
-  <div class="card-info">
-    <h3>🚆 交通</h3>
+  <div class="cinfo">
+    <h3>🚆 交通（已購，2張）</h3>
     <table class="tbl">
-      <tr><th>項目</th><th>訂票方式</th><th>費用</th></tr>
-      <tr><td>里斯本 → 波多（6/20）</td><td>cp.pt 提前訂</td><td>€20–€35</td></tr>
-      <tr><td>波多 → 里斯本（6/22）</td><td>cp.pt 提前訂</td><td>€20–€35</td></tr>
+      <tr><th>項目</th><th>出發站</th><th>時間</th></tr>
+      <tr><td>里斯本 → 波多（6/20）</td><td>⚠️ <strong>Santa Apolónia</strong>（非 Oriente）</td><td>12:00 出發</td></tr>
+      <tr><td>波多 → 里斯本（6/22）</td><td>Campanhã</td><td>11:40 出發 → Oriente 抵達</td></tr>
     </table>
   </div>
-  <div class="card-info">
-    <h3>🎫 通票</h3>
+  <div class="cinfo">
+    <h3>🎫 通票（各 2 張）</h3>
     <table class="tbl">
-      <tr><th>通票</th><th>購買方式</th><th>費用</th></tr>
-      <tr><td>Lisboa Card 48h</td><td>lisboacard.org 提前購買，機場換領</td><td>€39</td></tr>
-      <tr><td>Porto Card 1日含交通</td><td>portocard.com 或現場</td><td>€15</td></tr>
+      <tr><th>通票</th><th>購買方式</th><th>2人費用</th></tr>
+      <tr><td>Lisboa Card 48h</td><td>lisboacard.org 提前購，機場換領</td><td>€39 × 2 = <strong>€78</strong></td></tr>
+      <tr><td>Porto Card Walker 1日</td><td>portocard.city 線上購，Sé 旅遊局換領</td><td>€7.50 × 2 = <strong>€15</strong></td></tr>
+      <tr><td>Andante Tour Card 1日</td><td>波多地鐵站現場購買</td><td>€7.50 × 2 = <strong>€15</strong></td></tr>
     </table>
   </div>
-  <div class="card-info">
+  <div class="cinfo">
     <h3>🏛️ 景點（需提前購票）</h3>
     <table class="tbl">
-      <tr><th>景點</th><th>城市</th><th>訂票方式</th><th>費用</th></tr>
-      <tr><td>熱羅尼莫斯修道院</td><td>里斯本</td><td>Lisboa Card 免費，但仍需注意排隊</td><td>€18 → 免費</td></tr>
-      <tr><td>萊羅書店</td><td>波多</td><td><strong>livrarialello.pt 必須提前訂</strong></td><td>€10</td></tr>
+      <tr><th>景點</th><th>說明</th><th>2人費用</th></tr>
+      <tr><td>萊羅書店</td><td>⚠️ livrarialello.pt 提前購 2 張，現場不賣票</td><td>€10 × 2 = <strong>€20</strong></td></tr>
     </table>
   </div>
-  <div class="card-info">
-    <h3>🍽️ 餐廳</h3>
+  <div class="cinfo">
+    <h3>🍽️ 餐廳（需訂位 2 人）</h3>
     <table class="tbl">
-      <tr><th>餐廳</th><th>城市</th><th>訂位方式</th><th>備註</th></tr>
-      <tr><td>Cervejaria Ramiro</td><td>里斯本</td><td>官網 / TheFork（需押金 €25）</td><td>週一公休</td></tr>
-      <tr><td>Solar dos Presuntos</td><td>里斯本</td><td>官網 / 電話</td><td></td></tr>
-      <tr><td>Mini Bar Teatro</td><td>里斯本</td><td>minibar.pt</td><td>吧台位較好訂</td></tr>
+      <tr><th>餐廳</th><th>日期</th><th>訂位方式</th><th>備註</th></tr>
+      <tr><td>Cervejaria Ramiro</td><td>6/19 21:30</td><td>TheFork / 官網</td><td>押金 €25/人，共 €50；週六旺季提前 1 週訂</td></tr>
+      <tr><td>Solar dos Presuntos</td><td>6/22 晚</td><td>官網 / 電話</td><td>傳統葡式，訂 2 人位</td></tr>
     </table>
   </div>
-  <div class="card-info">
-    <h3>💰 費用概估（不含住宿、餐飲）</h3>
+  <div class="cinfo">
+    <h3>🏨 住宿（確認事項）</h3>
     <table class="tbl">
-      <tr><th>類別</th><th>金額</th></tr>
-      <tr><td>火車（來回）</td><td>€40–€70</td></tr>
-      <tr><td>Lisboa Card 48h</td><td>€39</td></tr>
-      <tr><td>Porto Card 1日</td><td>€15</td></tr>
-      <tr><td>萊羅書店</td><td>€10</td></tr>
-      <tr><td>其他景點（卡爾莫、迴廊等）</td><td>約 €15</td></tr>
-      <tr><td>市內交通（Uber 等）</td><td>約 €15</td></tr>
-      <tr><td><strong>小計</strong></td><td><strong>約 €134–€164</strong></td></tr>
+      <tr><td>The 7 Hotel（6/18–6/20）</td><td>確認雙人房（double / twin）房型</td></tr>
+      <tr><td>River Eyes Suites（6/20–6/22）</td><td>確認雙人房房型</td></tr>
+      <tr><td>Holiday Inn Express Saldanha（6/22–6/23）</td><td>確認雙人房房型</td></tr>
     </table>
+  </div>
+  <div class="cinfo">
+    <h3>💰 費用概估（2人，不含住宿、餐飲）</h3>
+    <table class="tbl">
+      <tr><th>類別</th><th>單人</th><th>2人合計</th></tr>
+      <tr><td>火車（來回，已購）</td><td>—</td><td>已完成</td></tr>
+      <tr><td>Lisboa Card 48h</td><td>€39</td><td>€78</td></tr>
+      <tr><td>Porto Card Walker</td><td>€7.50</td><td>€15</td></tr>
+      <tr><td>Andante Tour Card</td><td>€7.50</td><td>€15</td></tr>
+      <tr><td>萊羅書店</td><td>€10</td><td>€20</td></tr>
+      <tr><td>其他景點（卡爾莫、迴廊等）</td><td>約 €10</td><td>約 €20</td></tr>
+      <tr><td>市內 Uber（2人同搭）</td><td>—</td><td>約 €25</td></tr>
+      <tr><td><strong>小計</strong></td><td></td><td><strong>約 €173</strong></td></tr>
+    </table>
+    <div class="nbox info" style="margin-top:8px">💡 2人同搭 Uber 費用與 1 人幾乎相同，是最划算的市內交通方式。</div>
   </div>
 </div>
 
-<!-- ═══════════════ TAB: 旅行提醒 ═══════════════ -->
+<!-- ═══ 旅行提醒 ═══ -->
 <div id="tab-tips" class="section">
-  <div class="card-info">
-    <h3>🛡️ 女生獨旅安全</h3>
+  <div class="cinfo">
+    <h3>⏰ 退房時間提醒</h3>
     <table class="tbl">
-      <tr><td>Alfama 夜晚</td><td>巷弄不要太晚獨自深入</td></tr>
-      <tr><td>扒竊</td><td>機場、Ribeira 廣場、28 號電車注意隨身物品</td></tr>
-      <tr><td>夜間交通</td><td>晚上返回旅館優先使用 Uber 而非步行</td></tr>
-      <tr><td>通訊</td><td>建議購買當地 SIM 卡（NOS 或 MEO）保持網路</td></tr>
+      <tr><td>6/20 The 7 Hotel</td><td>建議 <strong>10:30 提早退房</strong>，火車 12:00 從 Santa Apolónia 出發。2人行李多，不要拖太晚。</td></tr>
+      <tr><td>6/22 River Eyes Suites</td><td>建議 <strong>10:30 提早退房</strong>，火車 11:40 從 Campanhã 出發，直接搭 Uber，不建議地鐵。</td></tr>
     </table>
   </div>
-  <div class="card-info">
+  <div class="cinfo">
+    <h3>🛡️ 旅行安全</h3>
+    <table class="tbl">
+      <tr><td>扒竊</td><td>機場、Ribeira 廣場、28 號電車注意隨身物品；兩人同行仍要注意</td></tr>
+      <tr><td>夜間交通</td><td>晚上返回旅館優先搭 Uber</td></tr>
+      <tr><td>通訊</td><td>建議購買當地 SIM 卡（NOS 或 MEO）；或開國際漫遊</td></tr>
+      <tr><td>緊急聯絡</td><td>葡萄牙緊急電話：112</td></tr>
+    </table>
+  </div>
+  <div class="cinfo">
     <h3>📱 實用 App</h3>
     <table class="tbl">
-      <tr><td>交通</td><td>CP（葡萄牙火車）、Uber、Google Maps</td></tr>
-      <tr><td>里斯本地鐵</td><td>Metro de Lisboa</td></tr>
+      <tr><td>火車</td><td>CP（葡萄牙國鐵）</td></tr>
+      <tr><td>叫車</td><td>Uber</td></tr>
+      <tr><td>地圖</td><td>Google Maps（離線下載里斯本 + 波多）</td></tr>
       <tr><td>餐廳訂位</td><td>TheFork</td></tr>
       <tr><td>翻譯</td><td>Google Translate（離線下載葡萄牙語）</td></tr>
     </table>
   </div>
-  <div class="card-info">
-    <h3>🌤️ 6月天氣</h3>
+  <div class="cinfo">
+    <h3>🌤️ 6月天氣 &amp; 消費</h3>
     <table class="tbl">
-      <tr><td>里斯本</td><td>25–28°C，陽光充足，偶有涼風；建議防曬、帶薄外套備用</td></tr>
+      <tr><td>里斯本</td><td>25–28°C，陽光充足；防曬 + 薄外套備用</td></tr>
       <tr><td>波多</td><td>22–26°C，比里斯本稍涼；傍晚河岸有風</td></tr>
-      <tr><td>穿著建議</td><td>輕便透氣、好走路的鞋（Alfama 坡道多）；備一件薄外套</td></tr>
-    </table>
-  </div>
-  <div class="card-info">
-    <h3>💶 消費參考</h3>
-    <table class="tbl">
       <tr><td>咖啡 bica</td><td>€0.80–€1.20</td></tr>
       <tr><td>蛋撻 pastel de nata</td><td>€1.20–€1.50</td></tr>
-      <tr><td>午餐（館內）</td><td>€12–€20</td></tr>
-      <tr><td>晚餐（餐廳）</td><td>€25–€50</td></tr>
-      <tr><td>Uber 市區</td><td>€5–€12</td></tr>
+      <tr><td>午餐（館內）</td><td>€12–€20/人</td></tr>
+      <tr><td>晚餐（餐廳）</td><td>€25–€50/人</td></tr>
+      <tr><td>Uber 市區（2人同搭）</td><td>€5–€12/趟</td></tr>
     </table>
   </div>
 </div>
 
-</div><!-- end main -->
-
+</div>
 <script>
-function showTab(id, btn) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('tab-' + id).classList.add('active');
+function showTab(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
   btn.classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo({top:0,behavior:'smooth'});
 }
-function tog(h) {
-  h.closest('.dcard').classList.toggle('open');
-}
-function atog(h) {
-  h.closest('.acard').classList.toggle('open');
-}
+function tog(h){ h.closest('.dcard').classList.toggle('open'); }
+function atog(h){ h.closest('.acard').classList.toggle('open'); }
 </script>
 </body>
 </html>
